@@ -1,6 +1,6 @@
 # **목차**
 1. 프로젝트 개요
-2. USE CASE / 유저 시나리오
+2. Use Case / 유저 시나리오
 3. Flow Chart
 4. 기능 구조도, 메뉴 구조도
 
@@ -9,9 +9,9 @@
 
 원데이 클래스 서비스를 이용하는 사용자는 GUEST, HOST, ADMIN으로 나뉩니다. GUEST와 HOST는 일반 회원으로 서비스를 이용하기 위해 회원가입이 필요하며, ADMIN은 관리자로 관리자 계정을 통해서 서비스를 관리하는 역할을 수행합니다. GUEST는 원데이 클래스 수강자로서 클래스 신청, 후기 작성, 피드 조회 등의 활동을 수행하며, HOST는 원데이 클래스 개설, 수강생 관리 등의 활동을 수행합니다.
 
-# **USE CASE / 유저 시나리오**
+# **Use Case / 유저 시나리오**
 
-몇 가지 대표 케이스만 기입되어 있습니다. 모든 케이스를 확인하려면 [WIKI - USE CASE / 시나리오](https://github.com/f-lab-edu/one-day-class/wiki/USE-CASE----%EC%9C%A0%EC%A0%80-%EC%8B%9C%EB%82%98%EB%A6%AC%EC%98%A4)를 참고해주세요.
+몇 가지 대표 케이스만 기입되어 있습니다. 모든 케이스를 확인하려면 [WIKI - Use Case / 시나리오](https://github.com/f-lab-edu/one-day-class/wiki/USE-CASE----%EC%9C%A0%EC%A0%80-%EC%8B%9C%EB%82%98%EB%A6%AC%EC%98%A4)를 참고해주세요.
 
 ## **1. GUEST**
 
@@ -112,6 +112,27 @@
    - 7-1. 이미 존재하는 카테고리명이면 존재하는 카테고리명이라는 메세지를 응답하고 4번 흐름으로 이동한다.
    - 7-2. 이외에는 8번 흐름으로 이동한다.
 8. 신규 카테고리가 등록되고 이를 포함한 카테고리 목록이 관리자에게 보여진다.
+
+# **Flow Chart**
+
+몇 가지 대표 케이스만 기입되어 있습니다. 모든 케이스를 확인하려면 [WIKI - Flow Chart](https://github.com/f-lab-edu/one-day-class/wiki/Flow-Chart)를 참고해주세요.
+
+## **1. GUEST**
+
+### **클래스 신청**
+
+## **2. HOST**
+
+### **HOST 회원가입**
+![HOST 회원가입](https://user-images.githubusercontent.com/57613635/168251444-47e86d25-2e63-4b04-ad52-a78228ba4aa0.svg)
+
+### **클래스 개설**
+
+## **3. ADMIN**
+
+### **HOST 가입 심사**
+
+### **대분류 카테고리(전문 분야) 등록**
 
 # **기능 구조도**
 기능 구조도는 [WIKI - 기능 구조도](https://github.com/f-lab-edu/one-day-class/wiki/%EA%B8%B0%EB%8A%A5-%EA%B5%AC%EC%A1%B0%EB%8F%84)를 참고해주세요.
