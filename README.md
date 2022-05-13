@@ -127,6 +127,7 @@
 ![HOST 회원가입](https://user-images.githubusercontent.com/57613635/168251444-47e86d25-2e63-4b04-ad52-a78228ba4aa0.svg)
 
 ### **클래스 개설**
+![클래스 개설](https://user-images.githubusercontent.com/57613635/168258975-9112c3f5-b638-4668-8c09-d7b220287772.svg)
 
 ## **3. ADMIN**
 
