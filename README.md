@@ -1,7 +1,7 @@
 # **목차**
 1. [프로젝트 개요](#프로젝트-개요)
-2. [Use Case / 유저 시나리오](https://github.com/f-lab-edu/one-day-class/blob/main/README.md#use-case--%EC%9C%A0%EC%A0%80-%EC%8B%9C%EB%82%98%EB%A6%AC%EC%98%A4)
-3. [Flow Chart](https://github.com/f-lab-edu/one-day-class/blob/main/README.md#flow-chart)
+2. [Use Case / 유저 시나리오](#use-case--유저-시나리오)
+3. [Flow Chart](#기능-구조도)
 4. [기능 구조도, 메뉴 구조도](#기능-구조도)
 
 # **프로젝트 개요**
