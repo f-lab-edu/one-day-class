@@ -120,6 +120,7 @@
 ## **1. GUEST**
 
 ### **클래스 신청**
+![클래스 신청](https://user-images.githubusercontent.com/57613635/168307974-6d305d0b-b9b4-4bc3-9806-f23038fdf46b.svg)
 
 ## **2. HOST**
 
