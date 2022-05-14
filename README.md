@@ -121,10 +121,10 @@
 ![클래스 신청](https://user-images.githubusercontent.com/57613635/168412000-df30be55-9f93-44ba-8a17-5178e2f1c96f.svg)
 
 ## **2. HOST**
+![HOST 회원가입](https://user-images.githubusercontent.com/57613635/168414668-6dfae7d7-3d34-4db0-a1c1-7dba5825731b.svg)
 
-![HOST 회원가입](https://user-images.githubusercontent.com/57613635/168251444-47e86d25-2e63-4b04-ad52-a78228ba4aa0.svg)
 ---
-![클래스 개설](https://user-images.githubusercontent.com/57613635/168258975-9112c3f5-b638-4668-8c09-d7b220287772.svg)
+![클래스 개설](https://user-images.githubusercontent.com/57613635/168415001-eb397f24-c47b-4c69-9819-c24a91a002bb.svg)
 
 ## **3. ADMIN**
 ![HOST 가입 심사, 대분류 카테고리(전문분야) 등록](https://user-images.githubusercontent.com/57613635/168410502-1abc4f7d-4e2f-41c2-89e8-b90ac09196ea.svg)
