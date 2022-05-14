@@ -118,8 +118,7 @@
 몇 가지 대표 케이스만 기입되어 있습니다. 모든 케이스를 확인하려면 [WIKI - Flow Chart](https://github.com/f-lab-edu/one-day-class/wiki/Flow-Chart)를 참고해주세요.
 
 ## **1. GUEST**
-
-![클래스 신청](https://user-images.githubusercontent.com/57613635/168307974-6d305d0b-b9b4-4bc3-9806-f23038fdf46b.svg)
+![클래스 신청](https://user-images.githubusercontent.com/57613635/168412000-df30be55-9f93-44ba-8a17-5178e2f1c96f.svg)
 
 ## **2. HOST**
 
@@ -128,8 +127,7 @@
 ![클래스 개설](https://user-images.githubusercontent.com/57613635/168258975-9112c3f5-b638-4668-8c09-d7b220287772.svg)
 
 ## **3. ADMIN**
-
-![HOST 가입 심사, 대분류 카테고리(전문분야) 등록](https://user-images.githubusercontent.com/57613635/168406505-e3189d1b-8d50-4a6c-8b6c-2f7aef75f2ba.svg)
+![HOST 가입 심사, 대분류 카테고리(전문분야) 등록](https://user-images.githubusercontent.com/57613635/168410502-1abc4f7d-4e2f-41c2-89e8-b90ac09196ea.svg)
 
 # **:hammer: 기능 구조도**
 기능 구조도는 [WIKI - 기능 구조도](https://github.com/f-lab-edu/one-day-class/wiki/%EA%B8%B0%EB%8A%A5-%EA%B5%AC%EC%A1%B0%EB%8F%84)를 참고해주세요.
