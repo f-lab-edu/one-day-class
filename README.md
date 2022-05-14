@@ -1,15 +1,15 @@
-# **목차**
-1. [프로젝트 개요](#프로젝트-개요)
-2. [Use Case / 유저 시나리오](#use-case--유저-시나리오)
-3. [Flow Chart](#flow-chart)
-4. [기능 구조도, 메뉴 구조도](#기능-구조도)
+# :bookmark_tabs: **목차**
+1. [프로젝트 개요](#books-프로젝트-개요)
+2. [Use Case / 유저 시나리오](#computer-use-case--유저-시나리오)
+3. [Flow Chart](#pushpin-flow-chart)
+4. [기능 구조도, 메뉴 구조도](#hammer-기능-구조도)
 
-# **프로젝트 개요**
+# :books: **프로젝트 개요**
 본 프로젝트에서는 원데이 클래스 서비스를 제공하는 시스템을 개발합니다. 원데이 클래스 서비스는 기본적으로 HOST가 클래스를 개설하면 GUEST가 가능한 일자에 예약(신청)하는 서비스입니다. 원데이 클래스란 하루 몇 시간 동안 일회성으로 이뤄지는 수업을 말하며 자신이 관심 있는 분야를 직접 선택해서 체험해볼 수 있다는 장점이 있습니다.
 
 원데이 클래스 서비스를 이용하는 사용자는 GUEST, HOST, ADMIN으로 나뉩니다. GUEST와 HOST는 일반 회원으로 서비스를 이용하기 위해 회원가입이 필요하며, ADMIN은 관리자로 관리자 계정을 통해서 서비스를 관리하는 역할을 수행합니다. GUEST는 원데이 클래스 수강자로서 클래스 신청, 후기 작성, 피드 조회 등의 활동을 수행하며, HOST는 원데이 클래스 개설, 수강생 관리 등의 활동을 수행합니다.
 
-# **Use Case / 유저 시나리오**
+# :computer: **Use Case / 유저 시나리오**
 
 몇 가지 대표 케이스만 기입되어 있습니다. 모든 케이스를 확인하려면 [WIKI - Use Case / 시나리오](https://github.com/f-lab-edu/one-day-class/wiki/Use-Case---%EC%9C%A0%EC%A0%80-%EC%8B%9C%EB%82%98%EB%A6%AC%EC%98%A4)를 참고해주세요.
 
@@ -113,7 +113,7 @@
    - 7-2. 이외에는 8번 흐름으로 이동한다.
 8. 신규 카테고리가 등록되고 이를 포함한 카테고리 목록이 관리자에게 보여진다.
 
-# **Flow Chart**
+# **:pushpin: Flow Chart**
 
 몇 가지 대표 케이스만 기입되어 있습니다. 모든 케이스를 확인하려면 [WIKI - Flow Chart](https://github.com/f-lab-edu/one-day-class/wiki/Flow-Chart)를 참고해주세요.
 
@@ -131,7 +131,7 @@
 
 ![HOST 가입 심사, 대분류 카테고리(전문분야) 등록](https://user-images.githubusercontent.com/57613635/168406505-e3189d1b-8d50-4a6c-8b6c-2f7aef75f2ba.svg)
 
-# **기능 구조도**
+# **:hammer: 기능 구조도**
 기능 구조도는 [WIKI - 기능 구조도](https://github.com/f-lab-edu/one-day-class/wiki/%EA%B8%B0%EB%8A%A5-%EA%B5%AC%EC%A1%B0%EB%8F%84)를 참고해주세요.
 
 # **서버 구조도**
