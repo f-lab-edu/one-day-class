@@ -119,22 +119,17 @@
 
 ## **1. GUEST**
 
-### **클래스 신청**
 ![클래스 신청](https://user-images.githubusercontent.com/57613635/168307974-6d305d0b-b9b4-4bc3-9806-f23038fdf46b.svg)
 
 ## **2. HOST**
 
-### **HOST 회원가입**
 ![HOST 회원가입](https://user-images.githubusercontent.com/57613635/168251444-47e86d25-2e63-4b04-ad52-a78228ba4aa0.svg)
-
-### **클래스 개설**
+---
 ![클래스 개설](https://user-images.githubusercontent.com/57613635/168258975-9112c3f5-b638-4668-8c09-d7b220287772.svg)
 
 ## **3. ADMIN**
 
-### **HOST 가입 심사**
-
-### **대분류 카테고리(전문 분야) 등록**
+![HOST 가입 심사, 대분류 카테고리(전문분야) 등록](https://user-images.githubusercontent.com/57613635/168406505-e3189d1b-8d50-4a6c-8b6c-2f7aef75f2ba.svg)
 
 # **기능 구조도**
 기능 구조도는 [WIKI - 기능 구조도](https://github.com/f-lab-edu/one-day-class/wiki/%EA%B8%B0%EB%8A%A5-%EA%B5%AC%EC%A1%B0%EB%8F%84)를 참고해주세요.
