@@ -2,7 +2,8 @@
 1. [프로젝트 개요](#books-프로젝트-개요)
 2. [Use Case / 유저 시나리오](#computer-use-case--유저-시나리오)
 3. [Flow Chart](#pushpin-flow-chart)
-4. [기능 구조도, 메뉴 구조도](#hammer-기능-구조도)
+4. [기능 구조도](#hammer-기능-구조도)
+5. [메뉴 구조도](#flags-메뉴-구조도)
 
 # :books: **프로젝트 개요**
 본 프로젝트에서는 원데이 클래스 서비스를 제공하는 시스템을 개발합니다. 원데이 클래스 서비스는 기본적으로 HOST가 클래스를 개설하면 GUEST가 가능한 일자에 예약(신청)하는 서비스입니다. 원데이 클래스란 하루 몇 시간 동안 일회성으로 이뤄지는 수업을 말하며 자신이 관심 있는 분야를 직접 선택해서 체험해볼 수 있다는 장점이 있습니다.
@@ -131,6 +132,13 @@
 
 # **:hammer: 기능 구조도**
 기능 구조도는 [WIKI - 기능 구조도](https://github.com/f-lab-edu/one-day-class/wiki/%EA%B8%B0%EB%8A%A5-%EA%B5%AC%EC%A1%B0%EB%8F%84)를 참고해주세요.
+
+# **:flags: 메뉴 구조도**
+![GUEST 메뉴 구조도](https://user-images.githubusercontent.com/57613635/168482023-20b43f4f-6d44-4f8a-be27-6cd84ebcd813.svg)
+---
+![HOST 메뉴 구조도](https://user-images.githubusercontent.com/57613635/168482024-ecb16eeb-ec1b-41a9-83c9-a499f606db2a.svg)
+---
+![ADMIN 메뉴 구조도](https://user-images.githubusercontent.com/57613635/168482027-ff2016c0-2d5e-420b-95e4-9d226603d1cb.svg)
 
 # **서버 구조도**
 (TODO)
