@@ -134,11 +134,11 @@
 기능 구조도는 [WIKI - 기능 구조도](https://github.com/f-lab-edu/one-day-class/wiki/%EA%B8%B0%EB%8A%A5-%EA%B5%AC%EC%A1%B0%EB%8F%84)를 참고해주세요.
 
 # **:flags: 메뉴 구조도**
-![GUEST 메뉴 구조도](https://user-images.githubusercontent.com/57613635/168482023-20b43f4f-6d44-4f8a-be27-6cd84ebcd813.svg)
+![GUEST 메뉴 구조도](https://user-images.githubusercontent.com/57613635/168800730-95a8cb23-191d-4be6-8037-ccb68fbf0bb7.png)
 ---
-![HOST 메뉴 구조도](https://user-images.githubusercontent.com/57613635/168482024-ecb16eeb-ec1b-41a9-83c9-a499f606db2a.svg)
+![HOST 메뉴 구조도](https://user-images.githubusercontent.com/57613635/168800811-2827e0d3-5fcd-46e3-bdbb-ff3b68c06cf4.png)
 ---
-![ADMIN 메뉴 구조도](https://user-images.githubusercontent.com/57613635/168482027-ff2016c0-2d5e-420b-95e4-9d226603d1cb.svg)
+![ADMIN 메뉴 구조도](https://user-images.githubusercontent.com/57613635/168800820-38987bb8-c03b-4d80-b379-a202b9351a4d.png)
 
 # **서버 구조도**
 (TODO)
