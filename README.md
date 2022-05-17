@@ -119,27 +119,27 @@
 몇 가지 대표 케이스만 기입되어 있습니다. 모든 케이스를 확인하려면 [WIKI - Flow Chart](https://github.com/f-lab-edu/one-day-class/wiki/Flow-Chart)를 참고해주세요.
 
 ## **1. GUEST**
-![클래스 신청](https://user-images.githubusercontent.com/57613635/168806676-ea2ec350-9522-4463-b391-6394300bdfcb.png)
+![클래스 신청](https://user-images.githubusercontent.com/57613635/168810165-929e5df9-dd53-4334-9623-f3f78cd77509.png)
 
 ## **2. HOST**
-![HOST 회원가입](https://user-images.githubusercontent.com/57613635/168806710-c9ef1507-2669-4324-ac25-b77015b7891a.png)
+![HOST 회원가입](https://user-images.githubusercontent.com/57613635/168810179-c0079e8c-b2ac-4f7b-b5a9-150d8b279208.png)
 
 ---
-![클래스 개설](https://user-images.githubusercontent.com/57613635/168806717-8bf9b063-d1e2-4eda-9e42-446e0c5d7131.png)
+![클래스 개설](https://user-images.githubusercontent.com/57613635/168810191-add69094-f24c-49f1-bd1a-57d9e8a1a07a.png)
 
 
 ## **3. ADMIN**
-![HOST 가입 심사](https://user-images.githubusercontent.com/57613635/168806795-25b735dd-db20-45c6-80a3-290fa8f39e9b.png)
+![HOST 가입 심사](https://user-images.githubusercontent.com/57613635/168810213-c6adc674-f0eb-4c01-a78f-e60f3224aad8.png)
 
 # **:hammer: 기능 구조도**
 기능 구조도는 [WIKI - 기능 구조도](https://github.com/f-lab-edu/one-day-class/wiki/%EA%B8%B0%EB%8A%A5-%EA%B5%AC%EC%A1%B0%EB%8F%84)를 참고해주세요.
 
 # **:flags: 메뉴 구조도**
-![GUEST 메뉴 구조도](https://user-images.githubusercontent.com/57613635/168800730-95a8cb23-191d-4be6-8037-ccb68fbf0bb7.png)
+![GUEST 메뉴 구조도](https://user-images.githubusercontent.com/57613635/168810302-9e84344b-3ed4-4f9f-9c33-159c34c50111.png)
 ---
-![HOST 메뉴 구조도](https://user-images.githubusercontent.com/57613635/168800811-2827e0d3-5fcd-46e3-bdbb-ff3b68c06cf4.png)
+![HOST 메뉴 구조도](https://user-images.githubusercontent.com/57613635/168810318-00632560-c53f-465f-b816-d12770eeeaa5.png)
 ---
-![ADMIN 메뉴 구조도](https://user-images.githubusercontent.com/57613635/168800820-38987bb8-c03b-4d80-b379-a202b9351a4d.png)
+![ADMIN 메뉴 구조도](https://user-images.githubusercontent.com/57613635/168810340-cc0a762c-185d-4d37-b172-aaaf540c8b42.png)
 
 # **서버 구조도**
 (TODO)
