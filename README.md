@@ -119,16 +119,17 @@
 몇 가지 대표 케이스만 기입되어 있습니다. 모든 케이스를 확인하려면 [WIKI - Flow Chart](https://github.com/f-lab-edu/one-day-class/wiki/Flow-Chart)를 참고해주세요.
 
 ## **1. GUEST**
-![클래스 신청](https://user-images.githubusercontent.com/57613635/168412000-df30be55-9f93-44ba-8a17-5178e2f1c96f.svg)
+![클래스 신청](https://user-images.githubusercontent.com/57613635/168806676-ea2ec350-9522-4463-b391-6394300bdfcb.png)
 
 ## **2. HOST**
-![HOST 회원가입](https://user-images.githubusercontent.com/57613635/168414668-6dfae7d7-3d34-4db0-a1c1-7dba5825731b.svg)
+![HOST 회원가입](https://user-images.githubusercontent.com/57613635/168806710-c9ef1507-2669-4324-ac25-b77015b7891a.png)
 
 ---
-![클래스 개설](https://user-images.githubusercontent.com/57613635/168415001-eb397f24-c47b-4c69-9819-c24a91a002bb.svg)
+![클래스 개설](https://user-images.githubusercontent.com/57613635/168806717-8bf9b063-d1e2-4eda-9e42-446e0c5d7131.png)
+
 
 ## **3. ADMIN**
-![HOST 가입 심사, 대분류 카테고리(전문분야) 등록](https://user-images.githubusercontent.com/57613635/168410502-1abc4f7d-4e2f-41c2-89e8-b90ac09196ea.svg)
+![HOST 가입 심사](https://user-images.githubusercontent.com/57613635/168806795-25b735dd-db20-45c6-80a3-290fa8f39e9b.png)
 
 # **:hammer: 기능 구조도**
 기능 구조도는 [WIKI - 기능 구조도](https://github.com/f-lab-edu/one-day-class/wiki/%EA%B8%B0%EB%8A%A5-%EA%B5%AC%EC%A1%B0%EB%8F%84)를 참고해주세요.
