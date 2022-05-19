@@ -135,7 +135,7 @@
 기능 구조도는 [WIKI - 기능 구조도](https://github.com/f-lab-edu/one-day-class/wiki/%EA%B8%B0%EB%8A%A5-%EA%B5%AC%EC%A1%B0%EB%8F%84)를 참고해주세요.
 
 # **:flags: 메뉴 구조도**
-![GUEST 메뉴 구조도](https://user-images.githubusercontent.com/57613635/168810302-9e84344b-3ed4-4f9f-9c33-159c34c50111.png)
+![GUEST 메뉴 구조도](https://user-images.githubusercontent.com/57613635/169211295-b8987b4d-b73b-4396-af30-a10eafe44415.png)
 ---
 ![HOST 메뉴 구조도](https://user-images.githubusercontent.com/57613635/168810318-00632560-c53f-465f-b816-d12770eeeaa5.png)
 ---
