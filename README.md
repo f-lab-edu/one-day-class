@@ -147,11 +147,53 @@
 (TODO)
 
 # **프로토 타입**
-백엔드 개발에 집중하기 위해 프론트엔드는 카카오 오븐을 활용해 디자인하였습니다. 프로토 타입은 아래 URL에서 좀 더 자세히 확인하실 수 있습니다.
+백엔드 개발에 집중하기 위해 프론트엔드는 카카오 오븐을 활용해 [여기](https://ovenapp.io/view/L1bPO5539pakldT4p9wsn8xBqcgV2Ys3/)에 디자인하였습니다.
 
-[프로토 타입 확인하기](https://ovenapp.io/view/L1bPO5539pakldT4p9wsn8xBqcgV2Ys3/)
+## **GUEST**
+![02_GUEST 회원가입](https://user-images.githubusercontent.com/57613635/169477991-e8a61cbc-c11a-479e-a4ac-1173d2104072.png)
+![04_카테고리 목록](https://user-images.githubusercontent.com/57613635/169478286-5f4d0c5c-5df1-4722-a52b-6fc3c30ccaf5.png)
+![05_클래스 목록](https://user-images.githubusercontent.com/57613635/169478290-3d333412-e268-4e8f-8ce2-5690c8d29528.png)
+![06_검색한 클래스 목록](https://user-images.githubusercontent.com/57613635/169478295-69df2832-d9e8-48df-a008-c9fb29a2e3ce.png)
+![07_클래스 상세](https://user-images.githubusercontent.com/57613635/169478298-9626ff49-5be7-4f41-aa23-2e19db6b2b40.png)
+![08_클래스 신청](https://user-images.githubusercontent.com/57613635/169478300-0e3a887b-bca3-4120-a672-a0476a5581eb.png)
+![09_클래스 신청 완료](https://user-images.githubusercontent.com/57613635/169478304-17f229be-14ba-4bdc-a2c3-a89e89db7f49.png)
+![10_피드](https://user-images.githubusercontent.com/57613635/169478307-0ce3c369-106d-4223-aab6-b9c319311314.png)
+![12_GUEST 마이 페이지](https://user-images.githubusercontent.com/57613635/169478780-6eb0861e-6cf3-41a1-a8f5-3ef5dfbd6a47.png)
+![13_수강 예정 클래스](https://user-images.githubusercontent.com/57613635/169478782-3f9935a3-65e0-4e2e-a3b7-83738870eda1.png)
+![14_수강 완료 클래스](https://user-images.githubusercontent.com/57613635/169478785-4454432f-8794-4ae7-b35e-4f728a052f21.png)
+![15_일반 후기 작성](https://user-images.githubusercontent.com/57613635/169478787-49e967ad-021b-45a5-9d00-69f69cc9383c.png)
+![16_사진 후기 작성](https://user-images.githubusercontent.com/57613635/169478789-6bab40d1-90e6-4154-aa04-361bac7a16c2.png)
 
-(진행중입니다.)
+## **HOST**
+![03_HOST 회원가입](https://user-images.githubusercontent.com/57613635/169477997-35bce286-edd3-4ced-9ec6-98d0905a277d.png)
+![21_HOST 클래스 관리 탭](https://user-images.githubusercontent.com/57613635/169479114-736d9137-b316-440d-be07-bdadbe70ad1c.png)
+![22_개설중인 클래스](https://user-images.githubusercontent.com/57613635/169479118-c4bb693b-454f-4d00-a8a5-57a21815faae.png)
+![23_클래스 수정](https://user-images.githubusercontent.com/57613635/169479122-401f90be-ce58-4e2c-9162-5a58b1541d29.png)
+![24_클래스 폐지](https://user-images.githubusercontent.com/57613635/169479125-4ca3e66c-c36c-4ea6-83a9-38fddc61202e.png)
+![25_마감된 클래스](https://user-images.githubusercontent.com/57613635/169479127-ff47e11f-963e-49df-a289-d2cecbc4575f.png)
+![26_클래스 개설](https://user-images.githubusercontent.com/57613635/169479128-e302d0e4-fc81-4fad-bfdd-e9b00a838899.png)
+![27_카테고리(소분류) 신청 내역](https://user-images.githubusercontent.com/57613635/169479134-7bfc4b31-77f3-43d7-a408-158e48ec7bcc.png)
+![28_카테고리(소분류) 신청](https://user-images.githubusercontent.com/57613635/169479137-8623efd2-dc54-40bf-985b-869819d8b855.png)
+![29_HOST 마이 페이지](https://user-images.githubusercontent.com/57613635/169479139-676774b8-5054-464d-bc11-d2350cc8f393.png)
+![30_전문분야 심사 신청](https://user-images.githubusercontent.com/57613635/169479140-997c0a94-dca0-4a4a-b3ed-35185c67e57d.png)
+
+## **GUEST, HOST 공통**
+![01_로그인](https://user-images.githubusercontent.com/57613635/169477604-7834fe85-2e38-46a8-ab3e-189905bb0505.png)
+![11_알림 센터](https://user-images.githubusercontent.com/57613635/169478769-02734567-deb8-4c5c-93df-3245a214bbf5.png)
+![17_비밀번호 입력](https://user-images.githubusercontent.com/57613635/169478792-9859a9a1-fea6-49fa-ae32-e97d3a0a241f.png)
+![18_회원탈퇴 확인](https://user-images.githubusercontent.com/57613635/169478793-216fe741-96de-498a-87d7-3d00e1c7b5da.png)
+![19_회원정보 수정](https://user-images.githubusercontent.com/57613635/169478796-6526d4b9-a92b-41c1-ada1-e0a01be45c1e.png)
+![20_비밀번호 변경](https://user-images.githubusercontent.com/57613635/169478799-65796638-de8a-4da5-8a8a-d68142974556.png)
+
+## **ADMIN**
+![31_ADMIN 회원 관리 탭](https://user-images.githubusercontent.com/57613635/169479411-5311e860-6a4f-461b-a083-7b7e1d48bf34.png)
+![32_HOST 가입 신청 내역](https://user-images.githubusercontent.com/57613635/169479420-14ac8231-b8b8-45aa-98c2-188d07c22efc.png)
+![33_HOST 가입 신청 정보](https://user-images.githubusercontent.com/57613635/169479423-7e2d8fca-a2ea-47ba-8dde-509e82c18ebd.png)
+![34_HOST 전문분야 신청 내역](https://user-images.githubusercontent.com/57613635/169479428-0f1c741b-d78f-4437-b2ab-d1309f1225e2.png)
+![35_ADMIN 카테고리 관리 탭](https://user-images.githubusercontent.com/57613635/169479432-86e5929e-8f2a-4c44-9566-69cd42d28d60.png)
+![36_카테고리(대분류) 목록](https://user-images.githubusercontent.com/57613635/169479433-e24d1661-b062-439c-b540-fb59274cd7f6.png)
+![37_카테고리(대분류) 등록](https://user-images.githubusercontent.com/57613635/169479435-3d23e091-d5e7-46cf-b9c1-a333f8ff2866.png)
+![38_카테고리(소분류) 관리](https://user-images.githubusercontent.com/57613635/169479438-4c12a14e-8360-4e8b-a558-929868672d76.png)
 
 # **ERD**
 (TODO)
