@@ -149,7 +149,11 @@
 (TODO)
 
 # **:iphone: 프로토 타입**
-백엔드 개발에 집중하기 위해 프론트엔드는 카카오 오븐을 활용해 [여기](https://ovenapp.io/view/L1bPO5539pakldT4p9wsn8xBqcgV2Ys3/)에 디자인하였습니다.
+백엔드 개발에 집중하기 위해 프론트엔드는 카카오 오븐을 활용해 디자인하는 정도로 마무리하였습니다.
+
+아래 URL에서 UI 기획안을 확인하실 수 있습니다.
+
+[UI 기획안 보기](https://ovenapp.io/view/L1bPO5539pakldT4p9wsn8xBqcgV2Ys3/)
 
 ## **GUEST**
 ![02_GUEST 회원가입](https://user-images.githubusercontent.com/57613635/169477991-e8a61cbc-c11a-479e-a4ac-1173d2104072.png)
