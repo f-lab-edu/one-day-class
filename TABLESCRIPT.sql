@@ -109,25 +109,6 @@ ENGINE = InnoDB;
 
 
 -- -----------------------------------------------------
--- Table `ONEDAYCLASS`.`timestamps`
--- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `ONEDAYCLASS`.`timestamps` (
-  `create_time` TIMESTAMP NULL DEFAULT CURRENT_TIMESTAMP,
-  `update_time` TIMESTAMP NULL);
-
-
--- -----------------------------------------------------
--- Table `ONEDAYCLASS`.`user_1`
--- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `ONEDAYCLASS`.`user_1` (
-  `username` VARCHAR(16) NOT NULL,
-  `email` VARCHAR(255) NOT NULL,
-  `password` VARCHAR(32) NOT NULL,
-  `create_time` TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
-  PRIMARY KEY (`email`));
-
-
--- -----------------------------------------------------
 -- Table `ONEDAYCLASS`.`message`
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS `ONEDAYCLASS`.`message` (
@@ -310,22 +291,6 @@ CREATE TABLE IF NOT EXISTS `ONEDAYCLASS`.`comment` (
     ON DELETE NO ACTION
     ON UPDATE NO ACTION)
 ENGINE = InnoDB;
-
-
--- -----------------------------------------------------
--- Table `ONEDAYCLASS`.`timestamps_1`
--- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `ONEDAYCLASS`.`timestamps_1` (
-  `create_time` TIMESTAMP NULL DEFAULT CURRENT_TIMESTAMP,
-  `update_time` TIMESTAMP NULL);
-
-
--- -----------------------------------------------------
--- Table `ONEDAYCLASS`.`timestamps_2`
--- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `ONEDAYCLASS`.`timestamps_2` (
-  `create_time` TIMESTAMP NULL DEFAULT CURRENT_TIMESTAMP,
-  `update_time` TIMESTAMP NULL);
 
 
 -- -----------------------------------------------------
