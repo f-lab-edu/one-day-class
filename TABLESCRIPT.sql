@@ -29,7 +29,6 @@ CREATE TABLE IF NOT EXISTS `ONEDAYCLASS`.`user` (
   PRIMARY KEY (`id`))
 ENGINE = InnoDB;
 
-
 -- -----------------------------------------------------
 -- Table `ONEDAYCLASS`.`image_file`
 -- -----------------------------------------------------
