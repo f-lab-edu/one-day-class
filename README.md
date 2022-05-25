@@ -5,8 +5,8 @@
 4. [기능 구조도](#hammer-기능-구조도)
 5. [메뉴 구조도](#flags-메뉴-구조도)
 6. [서버 구조도](#computer-서버-구조도)
-7. [프로토 타입](#iphone-프로토-타입)
-8. [ERD](#pencil2-erd)
+7. [ERD](#pencil2-erd)
+8. [프로토 타입](#iphone-프로토-타입)
 
 # **:books: 프로젝트 개요**
 본 프로젝트에서는 원데이 클래스 서비스를 제공하는 시스템을 개발합니다. 원데이 클래스 서비스는 기본적으로 HOST가 클래스를 개설하면 GUEST가 가능한 일자에 예약(신청)하는 서비스입니다. 원데이 클래스란 하루 몇 시간 동안 일회성으로 이뤄지는 수업을 말하며 자신이 관심 있는 분야를 직접 선택해서 체험해볼 수 있다는 장점이 있습니다.
@@ -131,6 +131,9 @@
 # **:computer: 서버 구조도**
 (TODO)
 
+# **:pencil2: ERD**
+![ERD](https://user-images.githubusercontent.com/57613635/169652150-ab19b876-821d-40fa-8f40-e89b62e5068c.png)
+
 # **:iphone: 프로토 타입**
 백엔드 개발에 집중하기 위해 프론트엔드는 카카오 오븐을 활용해 디자인하는 정도로 마무리하였습니다.
 
@@ -184,8 +187,6 @@
 ![37_카테고리(대분류) 등록](https://user-images.githubusercontent.com/57613635/169479435-3d23e091-d5e7-46cf-b9c1-a333f8ff2866.png)
 ![38_카테고리(소분류) 관리](https://user-images.githubusercontent.com/57613635/169479438-4c12a14e-8360-4e8b-a558-929868672d76.png)
 
-# **:pencil2: ERD**
-![ERD](https://user-images.githubusercontent.com/57613635/169652150-ab19b876-821d-40fa-8f40-e89b62e5068c.png)
 
 # **브랜치 관리 전략**
 ## **Git Flow**
