@@ -1,405 +1,257 @@
--- MySQL Workbench Forward Engineering
+CREATE SCHEMA IF NOT EXISTS `one` 
+   DEFAULT CHARACTER SET 'utf8mb4';
+USE `one` ;
 
-SET @OLD_UNIQUE_CHECKS=@@UNIQUE_CHECKS, UNIQUE_CHECKS=0;
-SET @OLD_FOREIGN_KEY_CHECKS=@@FOREIGN_KEY_CHECKS, FOREIGN_KEY_CHECKS=0;
-SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='ONLY_FULL_GROUP_BY,STRICT_TRANS_TABLES,NO_ZERO_IN_DATE,NO_ZERO_DATE,ERROR_FOR_DIVISION_BY_ZERO,NO_ENGINE_SUBSTITUTION';
+-- user Table Create SQL
+CREATE TABLE user
+(
+    `id`             INT            NOT NULL    AUTO_INCREMENT COMMENT '유저 테이블 식별자', 
+    `image_file_id`  INT            NULL        COMMENT '첨부한 심사 서류 이미지', 
+    `user_id`        VARCHAR(45)    NOT NULL    COMMENT '유저가 가입 시 설정한 아이디', 
+    `password`       VARCHAR(45)    NOT NULL    COMMENT '유저가 설정한 비밀번호', 
+    `name`           VARCHAR(45)    NOT NULL    COMMENT '유저 이름', 
+    `phone_number`   VARCHAR(45)    NOT NULL    COMMENT '유저가 인증한 휴대폰 번호', 
+    `user_type`      VARCHAR(1)     NOT NULL    COMMENT '''G'': Guest, ''H'': Host, ''A'': Admin', 
+    `user_status`    VARCHAR(1)     NOT NULL    COMMENT '''0'': 가입 완료, ''1'': 가입 심사 중, ''2'': 회원 탈퇴 중', 
+    `create_time`    TIMESTAMP      NOT NULL    COMMENT '컬럼 최초 생성 시간', 
+    `update_time`    TIMESTAMP      NOT NULL    COMMENT '컬럼 최종 수정 시간', 
+     PRIMARY KEY (id)
+) ENGINE = InnoDB;
 
--- -----------------------------------------------------
--- Schema ONEDAYCLASS
--- -----------------------------------------------------
-
--- -----------------------------------------------------
--- Schema ONEDAYCLASS
--- -----------------------------------------------------
-CREATE SCHEMA IF NOT EXISTS `ONEDAYCLASS` DEFAULT CHARACTER SET utf8 ;
-USE `ONEDAYCLASS` ;
-
--- -----------------------------------------------------
--- Table `ONEDAYCLASS`.`user`
--- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `ONEDAYCLASS`.`user` (
-  `id` VARCHAR(45) NOT NULL,
-  `password` VARCHAR(45) NOT NULL,
-  `name` VARCHAR(45) NOT NULL,
-  `phone_number` VARCHAR(45) NOT NULL,
-  `user_type` VARCHAR(1) NOT NULL,
-  `user_status` VARCHAR(1) NOT NULL,
-  `create_time` TIMESTAMP NOT NULL,
-  `update_time` TIMESTAMP NOT NULL,
-  PRIMARY KEY (`id`))
-ENGINE = InnoDB;
+ALTER TABLE user COMMENT '유저';
 
 
--- -----------------------------------------------------
--- Table `ONEDAYCLASS`.`image_file`
--- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `ONEDAYCLASS`.`image_file` (
-  `id` INT NOT NULL,
-  `path` VARCHAR(45) NOT NULL,
-  `name` VARCHAR(45) NOT NULL,
-  `content_type` VARCHAR(1) NOT NULL,
-  `create_time` TIMESTAMP NOT NULL,
-  `update_time` TIMESTAMP NOT NULL,
-  PRIMARY KEY (`id`))
-ENGINE = InnoDB;
+-- message Table Create SQL
+CREATE TABLE message
+(
+    `id`           INT            NOT NULL    AUTO_INCREMENT COMMENT '메세지 테이블 식별자', 
+    `user_id`      INT            NOT NULL    COMMENT '유저 테이블 식별자', 
+    `content`      VARCHAR(45)    NOT NULL    COMMENT '알림 메세지에 표시될 내용', 
+    `create_time`  TIMESTAMP      NOT NULL    COMMENT '컬럼 최초 생성 시간', 
+    `update_time`  TIMESTAMP      NOT NULL    COMMENT '컬럼 최종 수정 시간', 
+     PRIMARY KEY (id)
+) ENGINE = InnoDB;
+
+ALTER TABLE message COMMENT '메세지';
 
 
--- -----------------------------------------------------
--- Table `ONEDAYCLASS`.`big_category`
--- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `ONEDAYCLASS`.`big_category` (
-  `id` INT NOT NULL AUTO_INCREMENT,
-  `name` VARCHAR(45) NOT NULL,
-  `detail` VARCHAR(45) NOT NULL,
-  `file_id` INT NOT NULL,
-  `create_time` TIMESTAMP NOT NULL,
-  `update_time` TIMESTAMP NOT NULL,
-  PRIMARY KEY (`id`),
-  INDEX `fk_big_category_file1_idx` (`file_id` ASC) VISIBLE,
-  CONSTRAINT `fk_big_category_file1`
-    FOREIGN KEY (`file_id`)
-    REFERENCES `ONEDAYCLASS`.`image_file` (`id`)
-    ON DELETE NO ACTION
-    ON UPDATE NO ACTION)
-ENGINE = InnoDB;
+-- recommend Table Create SQL
+CREATE TABLE recommend
+(
+    `id`           INT           NOT NULL    AUTO_INCREMENT COMMENT '추천 테이블 식별자', 
+    `user_id`      INT           NOT NULL    COMMENT '유저 테이블 식별자', 
+    `review_id`    INT           NOT NULL    COMMENT '리뷰 테이블 식별자', 
+    `like_status`  VARCHAR(1)    NOT NULL    COMMENT '''0'': 추천 안함, ''1'': 추천함', 
+    `create_time`  TIMESTAMP     NOT NULL    COMMENT '컬럼 최초 생성 시간', 
+    `update_time`  TIMESTAMP     NOT NULL    COMMENT '컬럼 최종 수정 시간', 
+     PRIMARY KEY (id)
+) ENGINE = InnoDB;
+
+ALTER TABLE recommend COMMENT '추천';
 
 
--- -----------------------------------------------------
--- Table `ONEDAYCLASS`.`user_category`
--- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `ONEDAYCLASS`.`user_category` (
-  `id` INT NOT NULL,
-  `user_id` VARCHAR(45) NOT NULL,
-  `big_category_id` INT NOT NULL,
-  `create_time` TIMESTAMP NOT NULL,
-  `update_time` TIMESTAMP NOT NULL,
-  PRIMARY KEY (`id`, `user_id`, `big_category_id`),
-  INDEX `fk_user_category_user1_idx` (`user_id` ASC) VISIBLE,
-  INDEX `fk_user_category_big_category1_idx` (`big_category_id` ASC) VISIBLE,
-  CONSTRAINT `fk_user_category_user1`
-    FOREIGN KEY (`user_id`)
-    REFERENCES `ONEDAYCLASS`.`user` (`id`)
-    ON DELETE NO ACTION
-    ON UPDATE NO ACTION,
-  CONSTRAINT `fk_user_category_big_category1`
-    FOREIGN KEY (`big_category_id`)
-    REFERENCES `ONEDAYCLASS`.`big_category` (`id`)
-    ON DELETE NO ACTION
-    ON UPDATE NO ACTION)
-ENGINE = InnoDB;
+-- review Table Create SQL
+CREATE TABLE review
+(
+    `id`                INT            NOT NULL    AUTO_INCREMENT COMMENT '리뷰 테이블 식별자', 
+    `user_id`           INT            NOT NULL    COMMENT '유저 테이블 식별자(리뷰를 남긴 GUEST 식별자)', 
+    `one_day_class_id`  INT            NOT NULL    COMMENT '클래스 테이블 식별자', 
+    `image_file_id`     INT            NULL        COMMENT '이미지 파일 테이블 식별자', 
+    `content`           VARCHAR(45)    NOT NULL    COMMENT '리뷰 내용', 
+    `review_type`       VARCHAR(1)     NOT NULL    COMMENT '''0'': 일반 후기, ''1'': 사진 후기', 
+    `rating`            DOUBLE         NOT NULL    COMMENT '리뷰 평점', 
+    `create_time`       TIMESTAMP      NOT NULL    COMMENT '컬럼 최초 생성 시간', 
+    `update_time`       TIMESTAMP      NOT NULL    COMMENT '컬럼 최종 수정 시간', 
+     PRIMARY KEY (id)
+) ENGINE = InnoDB;
+
+ALTER TABLE review COMMENT '리뷰';
 
 
--- -----------------------------------------------------
--- Table `ONEDAYCLASS`.`small_category`
--- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `ONEDAYCLASS`.`small_category` (
-  `id` INT NOT NULL AUTO_INCREMENT,
-  `big_category_id` INT NOT NULL,
-  `name` VARCHAR(45) NOT NULL,
-  `create_time` TIMESTAMP NOT NULL,
-  `update_time` TIMESTAMP NOT NULL,
-  PRIMARY KEY (`id`, `big_category_id`),
-  INDEX `fk_small_category_big_category1_idx` (`big_category_id` ASC) VISIBLE,
-  CONSTRAINT `fk_small_category_big_category1`
-    FOREIGN KEY (`big_category_id`)
-    REFERENCES `ONEDAYCLASS`.`big_category` (`id`)
-    ON DELETE NO ACTION
-    ON UPDATE NO ACTION)
-ENGINE = InnoDB;
+-- comment Table Create SQL
+CREATE TABLE comment
+(
+    `id`           INT            NOT NULL    AUTO_INCREMENT COMMENT '댓글 테이블 식별자', 
+    `user_id`      INT            NOT NULL    COMMENT '유저 테이블 식별자', 
+    `review_id`    INT            NOT NULL    COMMENT '리뷰 테이블 식별자', 
+    `content`      VARCHAR(45)    NOT NULL    COMMENT '댓글 내용', 
+    `create_time`  TIMESTAMP      NOT NULL    COMMENT '컬럼 최초 생성 시간', 
+    `update_time`  TIMESTAMP      NOT NULL    COMMENT '컬럼 최종 수정 시간', 
+     PRIMARY KEY (id)
+) ENGINE = InnoDB;
+
+ALTER TABLE comment COMMENT '댓글';
 
 
--- -----------------------------------------------------
--- Table `ONEDAYCLASS`.`message`
--- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `ONEDAYCLASS`.`message` (
-  `id` INT NOT NULL,
-  `user_id` VARCHAR(45) NOT NULL,
-  `content` VARCHAR(45) NOT NULL,
-  `create_time` TIMESTAMP NOT NULL,
-  `update_time` TIMESTAMP NOT NULL,
-  PRIMARY KEY (`id`, `user_id`),
-  INDEX `fk_message_user1_idx` (`user_id` ASC) VISIBLE,
-  CONSTRAINT `fk_message_user1`
-    FOREIGN KEY (`user_id`)
-    REFERENCES `ONEDAYCLASS`.`user` (`id`)
-    ON DELETE NO ACTION
-    ON UPDATE NO ACTION)
-ENGINE = InnoDB;
+-- nested_comment Table Create SQL
+CREATE TABLE nested_comment
+(
+    `id`           INT            NOT NULL    AUTO_INCREMENT COMMENT '대댓글 테이블 식별자', 
+    `user_id`      INT            NOT NULL    COMMENT '유저 테이블 식별자', 
+    `comment_id`   INT            NOT NULL    COMMENT '댓글 테이블 식별자', 
+    `content`      VARCHAR(45)    NOT NULL    COMMENT '대댓글 내용', 
+    `create_time`  TIMESTAMP      NOT NULL    COMMENT '컬럼 최초 생성 시간', 
+    `update_time`  TIMESTAMP      NOT NULL    COMMENT '컬럼 최종 수정 시간', 
+     PRIMARY KEY (id)
+) ENGINE = InnoDB;
+
+ALTER TABLE nested_comment COMMENT '대댓글';
 
 
--- -----------------------------------------------------
--- Table `ONEDAYCLASS`.`address`
--- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `ONEDAYCLASS`.`address` (
-  `id` INT NOT NULL,
-  `city` VARCHAR(45) NOT NULL,
-  `town` VARCHAR(45) NOT NULL,
-  `create_time` TIMESTAMP NOT NULL,
-  `update_time` TIMESTAMP NOT NULL,
-  PRIMARY KEY (`id`))
-ENGINE = InnoDB;
+-- image_file Table Create SQL
+CREATE TABLE image_file
+(
+    `id`            INT            NOT NULL    AUTO_INCREMENT COMMENT '이미지 파일 테이블 식별자', 
+    `path`          VARCHAR(45)    NOT NULL    COMMENT '이미지 파일 경로', 
+    `name`          VARCHAR(45)    NOT NULL    COMMENT '이미지 파일명', 
+    `content_type`  VARCHAR(1)     NOT NULL    COMMENT '''0'': 심사, ''1'': 후기, ''2'': 카테고리, ''3'': 클래스', 
+    `create_time`   TIMESTAMP      NOT NULL    COMMENT '컬럼 최초 생성 시간', 
+    `update_time`   TIMESTAMP      NOT NULL    COMMENT '컬럼 최종 수정 시간', 
+     PRIMARY KEY (id)
+) ENGINE = InnoDB;
+
+ALTER TABLE image_file COMMENT '이미지 파일';
 
 
--- -----------------------------------------------------
--- Table `ONEDAYCLASS`.`one_day_class`
--- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `ONEDAYCLASS`.`one_day_class` (
-  `id` INT NOT NULL,
-  `host_user_id` VARCHAR(45) NOT NULL,
-  `small_category_id` INT NOT NULL,
-  `address_id` INT NOT NULL,
-  `name` VARCHAR(45) NOT NULL,
-  `image_file_id` INT NOT NULL,
-  `material` VARCHAR(45) NOT NULL,
-  `detail` VARCHAR(45) NOT NULL,
-  `rating` DOUBLE NULL,
-  `create_time` TIMESTAMP NOT NULL,
-  `update_time` TIMESTAMP NOT NULL,
-  PRIMARY KEY (`id`, `host_user_id`, `small_category_id`, `address_id`),
-  INDEX `fk_one_day_class_user1_idx` (`host_user_id` ASC) VISIBLE,
-  INDEX `fk_one_day_class_small_category1_idx` (`small_category_id` ASC) VISIBLE,
-  INDEX `fk_one_day_class_file1_idx` (`image_file_id` ASC) VISIBLE,
-  INDEX `fk_one_day_class_address1_idx` (`address_id` ASC) VISIBLE,
-  CONSTRAINT `fk_one_day_class_user1`
-    FOREIGN KEY (`host_user_id`)
-    REFERENCES `ONEDAYCLASS`.`user` (`id`)
-    ON DELETE NO ACTION
-    ON UPDATE NO ACTION,
-  CONSTRAINT `fk_one_day_class_small_category1`
-    FOREIGN KEY (`small_category_id`)
-    REFERENCES `ONEDAYCLASS`.`small_category` (`id`)
-    ON DELETE NO ACTION
-    ON UPDATE NO ACTION,
-  CONSTRAINT `fk_one_day_class_file1`
-    FOREIGN KEY (`image_file_id`)
-    REFERENCES `ONEDAYCLASS`.`image_file` (`id`)
-    ON DELETE NO ACTION
-    ON UPDATE NO ACTION,
-  CONSTRAINT `fk_one_day_class_address1`
-    FOREIGN KEY (`address_id`)
-    REFERENCES `ONEDAYCLASS`.`address` (`id`)
-    ON DELETE NO ACTION
-    ON UPDATE NO ACTION)
-ENGINE = InnoDB;
+-- user_big_category Table Create SQL
+CREATE TABLE user_big_category
+(
+    `user_id`          INT          NOT NULL    COMMENT '유저 테이블 식별자', 
+    `big_category_id`  INT          NOT NULL    COMMENT '대분류 카테고리 테이블 식별자', 
+    `create_time`      TIMESTAMP    NOT NULL    COMMENT '컬럼 최초 생성 시간', 
+    `update_time`      TIMESTAMP    NOT NULL    COMMENT '컬럼 최종 수정 시간', 
+     PRIMARY KEY (user_id, big_category_id)
+) ENGINE = InnoDB;
+
+ALTER TABLE user_big_category COMMENT '유저 대분류 카테고리';
 
 
--- -----------------------------------------------------
--- Table `ONEDAYCLASS`.`course`
--- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `ONEDAYCLASS`.`course` (
-  `id` INT NOT NULL,
-  `one_day_class_id` INT NOT NULL,
-  `capacity` INT NOT NULL,
-  `date` VARCHAR(45) NOT NULL,
-  `time` VARCHAR(45) NOT NULL,
-  `course_status` VARCHAR(1) NOT NULL,
-  `create_time` TIMESTAMP NOT NULL,
-  `update_time` TIMESTAMP NOT NULL,
-  PRIMARY KEY (`id`, `one_day_class_id`),
-  INDEX `fk_course_one_day_class1_idx` (`one_day_class_id` ASC) VISIBLE,
-  CONSTRAINT `fk_course_one_day_class1`
-    FOREIGN KEY (`one_day_class_id`)
-    REFERENCES `ONEDAYCLASS`.`one_day_class` (`id`)
-    ON DELETE NO ACTION
-    ON UPDATE NO ACTION)
-ENGINE = InnoDB;
+-- big_category Table Create SQL
+CREATE TABLE big_category
+(
+    `id`             INT            NOT NULL    AUTO_INCREMENT COMMENT '대분류 카테고리 테이블 식별자', 
+    `image_file_id`  INT            NULL        COMMENT '이미지 파일 테이블 식별자', 
+    `name`           VARCHAR(45)    NOT NULL    COMMENT '대분류 카테고리 이름', 
+    `detail`         VARCHAR(45)    NOT NULL    COMMENT '대분류 카테고리 설명', 
+    `create_time`    TIMESTAMP      NOT NULL    COMMENT '컬럼 최초 생성 시간', 
+    `update_time`    TIMESTAMP      NOT NULL    COMMENT '컬럼 최종 수정 시간', 
+     PRIMARY KEY (id)
+) ENGINE = InnoDB;
+
+ALTER TABLE big_category COMMENT '대분류 카테고리';
 
 
--- -----------------------------------------------------
--- Table `ONEDAYCLASS`.`course_application_history`
--- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `ONEDAYCLASS`.`course_application_history` (
-  `id` INT NOT NULL,
-  `guest_user_id` VARCHAR(45) NOT NULL,
-  `course_id` INT NOT NULL,
-  `application_status` VARCHAR(1) NOT NULL,
-  `create_time` TIMESTAMP NOT NULL,
-  `update_time` TIMESTAMP NOT NULL,
-  PRIMARY KEY (`id`, `guest_user_id`, `course_id`),
-  INDEX `fk_one_day_class_application_details_user1_idx` (`guest_user_id` ASC) VISIBLE,
-  INDEX `fk_one_day_class_application_detail_course1_idx` (`course_id` ASC) VISIBLE,
-  CONSTRAINT `fk_one_day_class_application_details_user1`
-    FOREIGN KEY (`guest_user_id`)
-    REFERENCES `ONEDAYCLASS`.`user` (`id`)
-    ON DELETE NO ACTION
-    ON UPDATE NO ACTION,
-  CONSTRAINT `fk_one_day_class_application_detail_course1`
-    FOREIGN KEY (`course_id`)
-    REFERENCES `ONEDAYCLASS`.`course` (`id`)
-    ON DELETE NO ACTION
-    ON UPDATE NO ACTION)
-ENGINE = InnoDB;
+-- small_category Table Create SQL
+CREATE TABLE small_category
+(
+    `id`               INT            NOT NULL    AUTO_INCREMENT COMMENT '소분류 카테고리 테이블 식별자', 
+    `big_category_id`  INT            NOT NULL    COMMENT '대분류 카테고리 테이블 식별자', 
+    `name`             VARCHAR(45)    NOT NULL    COMMENT '소분류 카테고리 이름', 
+    `create_time`      TIMESTAMP      NOT NULL    COMMENT '컬럼 최초 생성 시간', 
+    `update_time`      TIMESTAMP      NOT NULL    COMMENT '컬럼 최종 수정 시간', 
+     PRIMARY KEY (id)
+) ENGINE = InnoDB;
+
+ALTER TABLE small_category COMMENT '소분류 카테고리';
 
 
--- -----------------------------------------------------
--- Table `ONEDAYCLASS`.`review`
--- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `ONEDAYCLASS`.`review` (
-  `id` INT NOT NULL,
-  `one_day_class_id` INT NOT NULL,
-  `guest_user_id` VARCHAR(45) NOT NULL,
-  `content` VARCHAR(255) NOT NULL,
-  `review_type` VARCHAR(1) NOT NULL,
-  `image_file_id` INT NOT NULL,
-  `rating` DOUBLE NOT NULL,
-  `create_time` TIMESTAMP NOT NULL,
-  `update_time` TIMESTAMP NOT NULL,
-  PRIMARY KEY (`id`, `one_day_class_id`, `guest_user_id`),
-  INDEX `fk_review_one_day_class1_idx` (`one_day_class_id` ASC) VISIBLE,
-  INDEX `fk_review_user1_idx` (`guest_user_id` ASC) VISIBLE,
-  INDEX `fk_review_file1_idx` (`image_file_id` ASC) VISIBLE,
-  CONSTRAINT `fk_review_one_day_class1`
-    FOREIGN KEY (`one_day_class_id`)
-    REFERENCES `ONEDAYCLASS`.`one_day_class` (`id`)
-    ON DELETE NO ACTION
-    ON UPDATE NO ACTION,
-  CONSTRAINT `fk_review_user1`
-    FOREIGN KEY (`guest_user_id`)
-    REFERENCES `ONEDAYCLASS`.`user` (`id`)
-    ON DELETE NO ACTION
-    ON UPDATE NO ACTION,
-  CONSTRAINT `fk_review_file1`
-    FOREIGN KEY (`image_file_id`)
-    REFERENCES `ONEDAYCLASS`.`image_file` (`id`)
-    ON DELETE NO ACTION
-    ON UPDATE NO ACTION)
-ENGINE = InnoDB;
+-- address Table Create SQL
+CREATE TABLE address
+(
+    `id`           INT            NOT NULL    AUTO_INCREMENT COMMENT '주소 테이블 식별자', 
+    `city`         VARCHAR(45)    NOT NULL    COMMENT '도/시', 
+    `town`         VARCHAR(45)    NOT NULL    COMMENT '시/군/구', 
+    `create_time`  TIMESTAMP      NOT NULL    COMMENT '컬럼 최초 생성 시간', 
+    `update_time`  TIMESTAMP      NOT NULL    COMMENT '컬럼 최종 수정 시간', 
+     PRIMARY KEY (id)
+) ENGINE = InnoDB;
+
+ALTER TABLE address COMMENT '주소';
 
 
--- -----------------------------------------------------
--- Table `ONEDAYCLASS`.`comment`
--- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `ONEDAYCLASS`.`comment` (
-  `id` INT NOT NULL,
-  `review_id` INT NOT NULL,
-  `review_one_day_class_id` INT NOT NULL,
-  `user_id` VARCHAR(45) NULL,
-  `content` VARCHAR(45) NOT NULL,
-  `create_time` TIMESTAMP NOT NULL,
-  `update_time` TIMESTAMP NOT NULL,
-  PRIMARY KEY (`id`, `review_id`, `review_one_day_class_id`),
-  INDEX `fk_comment_user1_idx` (`user_id` ASC) VISIBLE,
-  INDEX `fk_comment_review1_idx` (`review_id` ASC, `review_one_day_class_id` ASC) VISIBLE,
-  CONSTRAINT `fk_comment_user1`
-    FOREIGN KEY (`user_id`)
-    REFERENCES `ONEDAYCLASS`.`user` (`id`)
-    ON DELETE NO ACTION
-    ON UPDATE NO ACTION,
-  CONSTRAINT `fk_comment_review1`
-    FOREIGN KEY (`review_id` , `review_one_day_class_id`)
-    REFERENCES `ONEDAYCLASS`.`review` (`id` , `one_day_class_id`)
-    ON DELETE NO ACTION
-    ON UPDATE NO ACTION)
-ENGINE = InnoDB;
+-- course Table Create SQL
+CREATE TABLE course
+(
+    `id`                 INT            NOT NULL    AUTO_INCREMENT COMMENT '원데이 클래스 테이블 식별자', 
+    `user_id`            INT            NOT NULL    COMMENT '유저 테이블 식별자(클래스를 개설한 HOST 식별자)', 
+    `small_category_id`  INT            NOT NULL    COMMENT '소분류 카테고리 테이블 식별자', 
+    `address_id`         INT            NOT NULL    COMMENT '주소 테이블 식별자(원데이 클래스 주소)', 
+    `image_file_id`      INT            NULL        COMMENT '이미지 파일 테이블 식별자', 
+    `address_detail`     VARCHAR(45)    NOT NULL    COMMENT '원데이 클래스 상세 주소', 
+    `name`               VARCHAR(45)    NOT NULL    COMMENT '원데이 클래스 이름', 
+    `material`           VARCHAR(45)    NOT NULL    COMMENT '원데이 클래스 준비물', 
+    `capacity`           INT            NOT NULL    COMMENT '원데이 클래스 한 타임 수강 정원', 
+    `detail`             VARCHAR(45)    NOT NULL    COMMENT '원데이 클래스 설명', 
+    `rating`             DOUBLE         NULL        COMMENT '원데이 클래스 평점', 
+    `create_time`        TIMESTAMP      NOT NULL    COMMENT '컬럼 최초 생성 시간', 
+    `update_time`        TIMESTAMP      NOT NULL    COMMENT '컬럼 최종 수정 시간', 
+     PRIMARY KEY (id)
+) ENGINE = InnoDB;
+
+ALTER TABLE course COMMENT '원데이 클래스';
 
 
--- -----------------------------------------------------
--- Table `ONEDAYCLASS`.`small_category_application_history`
--- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `ONEDAYCLASS`.`small_category_application_history` (
-  `id` INT NOT NULL,
-  `user_id` VARCHAR(45) NOT NULL,
-  `big_category_id` INT NOT NULL,
-  `small_category_name` VARCHAR(45) NOT NULL,
-  `status` VARCHAR(1) NOT NULL,
-  `create_time` TIMESTAMP NOT NULL,
-  `update_time` TIMESTAMP NOT NULL,
-  PRIMARY KEY (`id`, `user_id`, `big_category_id`),
-  INDEX `fk_small_category_application_history_user1_idx` (`user_id` ASC) VISIBLE,
-  INDEX `fk_small_category_application_history_image_big_category1_idx` (`big_category_id` ASC) VISIBLE,
-  CONSTRAINT `fk_small_category_application_history_user1`
-    FOREIGN KEY (`user_id`)
-    REFERENCES `ONEDAYCLASS`.`user` (`id`)
-    ON DELETE NO ACTION
-    ON UPDATE NO ACTION,
-  CONSTRAINT `fk_small_category_application_history_image_big_category1`
-    FOREIGN KEY (`big_category_id`)
-    REFERENCES `ONEDAYCLASS`.`big_category` (`id`)
-    ON DELETE NO ACTION
-    ON UPDATE NO ACTION)
-ENGINE = InnoDB;
+-- course_detail Table Create SQL
+CREATE TABLE course_detail
+(
+    `id`             INT            NOT NULL    AUTO_INCREMENT COMMENT '원데이 클래스 상세 테이블 식별자', 
+    `course_id`      INT            NOT NULL    COMMENT '원데이 클래스 테이블 식별자', 
+    `date`           VARCHAR(45)    NOT NULL    COMMENT '원데이 클래스 개설 일자', 
+    `time`           VARCHAR(45)    NOT NULL    COMMENT '원데이 클래스 개설 시간', 
+    `course_status`  VARCHAR(1)     NOT NULL    COMMENT '''0'': 개설, ''1'': 폐지', 
+    `create_time`    TIMESTAMP      NOT NULL    COMMENT '컬럼 최초 생성 시간', 
+    `update_time`    TIMESTAMP      NOT NULL    COMMENT '컬럼 최종 수정 시간', 
+     PRIMARY KEY (id)
+) ENGINE = InnoDB;
+
+ALTER TABLE course_detail COMMENT '원데이 클래스 상세';
 
 
--- -----------------------------------------------------
--- Table `ONEDAYCLASS`.`big_category_application_history`
--- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `ONEDAYCLASS`.`big_category_application_history` (
-  `id` INT NOT NULL,
-  `host_user_id` VARCHAR(45) NOT NULL,
-  `big_category_name` VARCHAR(45) NOT NULL,
-  `big_category_detail` VARCHAR(45) NOT NULL,
-  `image_file_id` INT NOT NULL,
-  `status` VARCHAR(1) NOT NULL,
-  `create_time` TIMESTAMP NOT NULL,
-  `update_time` TIMESTAMP NOT NULL,
-  PRIMARY KEY (`id`, `host_user_id`),
-  INDEX `fk_big_category_application_history_user1_idx` (`host_user_id` ASC) VISIBLE,
-  INDEX `fk_big_category_application_history_image_file1_idx` (`image_file_id` ASC) VISIBLE,
-  CONSTRAINT `fk_big_category_application_history_user1`
-    FOREIGN KEY (`host_user_id`)
-    REFERENCES `ONEDAYCLASS`.`user` (`id`)
-    ON DELETE NO ACTION
-    ON UPDATE NO ACTION,
-  CONSTRAINT `fk_big_category_application_history_image_file1`
-    FOREIGN KEY (`image_file_id`)
-    REFERENCES `ONEDAYCLASS`.`image_file` (`id`)
-    ON DELETE NO ACTION
-    ON UPDATE NO ACTION)
-ENGINE = InnoDB;
+-- course_application_history Table Create SQL
+CREATE TABLE course_application_history
+(
+    `id`                  INT           NOT NULL    AUTO_INCREMENT COMMENT '원데이 클래스 신청 내역 테이블 식별자', 
+    `course_detail_id`    INT           NOT NULL    COMMENT '원데이 클래스 상세 테이블 식별자', 
+    `user_id`             INT           NOT NULL    COMMENT '유저 테이블 식별자(클래스 신청한 GUEST 식별자)', 
+    `application_status`  VARCHAR(1)    NOT NULL    COMMENT '''0'': 신청, ''1'': 취소', 
+    `create_time`         TIMESTAMP     NOT NULL    COMMENT '컬럼 최초 생성 시간', 
+    `update_time`         TIMESTAMP     NOT NULL    COMMENT '컬럼 최종 수정 시간', 
+     PRIMARY KEY (id)
+) ENGINE = InnoDB;
+
+ALTER TABLE course_application_history COMMENT '원데이 클래스 신청 내역';
 
 
--- -----------------------------------------------------
--- Table `ONEDAYCLASS`.`nested_comment`
--- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `ONEDAYCLASS`.`nested_comment` (
-  `id` INT NOT NULL,
-  `comment_id` INT NOT NULL,
-  `user_id` VARCHAR(45) NULL,
-  `content` VARCHAR(45) NOT NULL,
-  `create_time` TIMESTAMP NOT NULL,
-  `update_time` TIMESTAMP NOT NULL,
-  PRIMARY KEY (`id`, `comment_id`),
-  INDEX `fk_nested_comment_comment1_idx` (`comment_id` ASC) VISIBLE,
-  INDEX `fk_nested_comment_user1_idx` (`user_id` ASC) VISIBLE,
-  CONSTRAINT `fk_nested_comment_comment1`
-    FOREIGN KEY (`comment_id`)
-    REFERENCES `ONEDAYCLASS`.`comment` (`id`)
-    ON DELETE NO ACTION
-    ON UPDATE NO ACTION,
-  CONSTRAINT `fk_nested_comment_user1`
-    FOREIGN KEY (`user_id`)
-    REFERENCES `ONEDAYCLASS`.`user` (`id`)
-    ON DELETE NO ACTION
-    ON UPDATE NO ACTION)
-ENGINE = InnoDB;
+-- small_category_application_history Table Create SQL
+CREATE TABLE small_category_application_history
+(
+    `id`                  INT            NOT NULL    AUTO_INCREMENT COMMENT '소분류 카테고리 신청 내역 테이블 식별자', 
+    `user_id`             INT            NOT NULL    COMMENT '유저 테이블 식별자(신청한 HOST 식별자)', 
+    `big_category_id`     INT            NOT NULL    COMMENT '대분류 카테고리 테이블 식별자', 
+    `name`                VARCHAR(45)    NOT NULL    COMMENT '소분류 카테고리 이름', 
+    `application_status`  VARCHAR(1)     NOT NULL    COMMENT '''0'': 신청, ''1'': 승인, ''2'': 거절', 
+    `create_time`         TIMESTAMP      NOT NULL    COMMENT '컬럼 최초 생성 시간', 
+    `update_time`         TIMESTAMP      NOT NULL    COMMENT '컬럼 최종 수정 시간', 
+     PRIMARY KEY (id)
+) ENGINE = InnoDB;
+
+ALTER TABLE small_category_application_history COMMENT '소분류 카테고리 신청 내역';
 
 
--- -----------------------------------------------------
--- Table `ONEDAYCLASS`.`like`
--- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `ONEDAYCLASS`.`like` (
-  `id` INT NOT NULL,
-  `user_id` VARCHAR(45) NOT NULL,
-  `review_id` INT NOT NULL,
-  `like_status` VARCHAR(1) NOT NULL,
-  `create_time` TIMESTAMP NOT NULL,
-  `update_time` TIMESTAMP NOT NULL,
-  PRIMARY KEY (`id`, `user_id`, `review_id`),
-  INDEX `fk_like_user1_idx` (`user_id` ASC) VISIBLE,
-  INDEX `fk_like_review1_idx` (`review_id` ASC) VISIBLE,
-  CONSTRAINT `fk_like_user1`
-    FOREIGN KEY (`user_id`)
-    REFERENCES `ONEDAYCLASS`.`user` (`id`)
-    ON DELETE NO ACTION
-    ON UPDATE NO ACTION,
-  CONSTRAINT `fk_like_review1`
-    FOREIGN KEY (`review_id`)
-    REFERENCES `ONEDAYCLASS`.`review` (`id`)
-    ON DELETE NO ACTION
-    ON UPDATE NO ACTION)
-ENGINE = InnoDB;
+-- big_category_application_history Table Create SQL
+CREATE TABLE big_category_application_history
+(
+    `id`                  INT            NOT NULL    AUTO_INCREMENT COMMENT '대분류 카테고리 신청 내역 테이블 식별자', 
+    `user_id`             INT            NOT NULL    COMMENT '유저 테이블 식별자(신청한 HOST 식별자)', 
+    `image_file_id`       INT            NULL        COMMENT '이미지 파일 테이블 식별자', 
+    `name`                VARCHAR(45)    NOT NULL    COMMENT '대분류 카테고리 이름', 
+    `address_detail`      VARCHAR(45)    NOT NULL    COMMENT '대분류 카테고리 설명', 
+    `application_status`  VARCHAR(1)     NOT NULL    COMMENT '''0'': 신청, ''1'': 승인, ''2'': 거절', 
+    `create_time`         TIMESTAMP      NOT NULL    COMMENT '컬럼 최초 생성 시간', 
+    `update_time`         TIMESTAMP      NOT NULL    COMMENT '컬럼 최종 수정 시간', 
+     PRIMARY KEY (id)
+) ENGINE = InnoDB;
+
+ALTER TABLE big_category_application_history COMMENT '대분류 카테고리 신청 내역';
 
 
-SET SQL_MODE=@OLD_SQL_MODE;
-SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS;
-SET UNIQUE_CHECKS=@OLD_UNIQUE_CHECKS;
