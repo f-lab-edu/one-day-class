@@ -141,7 +141,7 @@
 (TODO)
 
 # **:pencil2: ERD**
-![ERD](https://user-images.githubusercontent.com/57613635/169652150-ab19b876-821d-40fa-8f40-e89b62e5068c.png)
+![ERD](https://user-images.githubusercontent.com/57613635/170429787-3864443d-200b-4a06-ac93-c7dc5ed52d60.png)
 
 # **:iphone: 프로토 타입**
 백엔드 개발에 집중하기 위해 프론트엔드는 카카오 오븐을 활용해 디자인하는 정도로 마무리하였습니다.
