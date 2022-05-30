@@ -1,4 +1,4 @@
-package com.one.model;
+package com.one.domain;
 
 import java.time.LocalDateTime;
 
