@@ -1,7 +1,7 @@
-package com.one.user.controller;
+package com.one.controller;
 
-import com.one.user.model.User;
-import com.one.user.service.UserService;
+import com.one.model.User;
+import com.one.service.UserService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;

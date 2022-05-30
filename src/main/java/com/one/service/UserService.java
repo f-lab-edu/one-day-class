@@ -1,7 +1,7 @@
-package com.one.user.service;
+package com.one.service;
 
-import com.one.user.mapper.UserMapper;
-import com.one.user.model.User;
+import com.one.mapper.UserMapper;
+import com.one.model.User;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
