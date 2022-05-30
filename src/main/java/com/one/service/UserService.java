@@ -1,11 +1,10 @@
 package com.one.service;
 
+import com.one.exception.UserNotFoundException;
 import com.one.mapper.UserMapper;
-import com.one.model.User;
+import com.one.domain.User;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
-
-import java.util.Optional;
 
 @Service
 @RequiredArgsConstructor // final이나 @NotNull이 붙은 필드의 생성자를 생성해주는 롬복 어노테이션
@@ -13,7 +12,7 @@ public class UserService {
 
     private final UserMapper userMapper;
 
-    public Optional<User> getUserById(int id) {
-        return userMapper.selectUserById(id);
+    public User getUserById(Integer id) {
+        return userMapper.selectUserById(id).orElseThrow(() -> new UserNotFoundException());
     }
 }
