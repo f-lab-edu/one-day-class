@@ -1,6 +1,6 @@
-package com.one.mapper;
+package com.one.domain.user.mapper;
 
-import com.one.domain.User;
+import com.one.domain.user.model.User;
 import org.apache.ibatis.annotations.Mapper;
 
 import java.util.Optional;

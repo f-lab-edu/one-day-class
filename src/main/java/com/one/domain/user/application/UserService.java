@@ -1,8 +1,8 @@
-package com.one.service;
+package com.one.domain.user.application;
 
-import com.one.exception.UserNotFoundException;
-import com.one.mapper.UserMapper;
-import com.one.domain.User;
+import com.one.domain.user.exception.UserNotFoundException;
+import com.one.domain.user.mapper.UserMapper;
+import com.one.domain.user.model.User;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 

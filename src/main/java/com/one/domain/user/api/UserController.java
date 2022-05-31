@@ -1,7 +1,7 @@
-package com.one.controller;
+package com.one.domain.user.api;
 
-import com.one.domain.User;
-import com.one.service.UserService;
+import com.one.domain.user.model.User;
+import com.one.domain.user.application.UserService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -15,7 +15,7 @@ public class UserController {
 
     private final UserService userService;
 
-    @GetMapping("/user/{id}")
+    @GetMapping("/users/{id}")
     public ResponseEntity<User> getUserById(@PathVariable final int id) {
         final User user = userService.getUserById(id);
         return new ResponseEntity<>(user, HttpStatus.OK);
