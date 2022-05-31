@@ -253,5 +253,3 @@ CREATE TABLE big_category_application_history
 ) ENGINE = InnoDB;
 
 ALTER TABLE big_category_application_history COMMENT '대분류 카테고리 신청 내역';
-
-
