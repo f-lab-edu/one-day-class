@@ -12,7 +12,7 @@ public class UserService {
 
     private final UserMapper userMapper;
 
-    public User getUserById(Integer id) {
+    public User getUserById(final int id) {
         return userMapper.selectUserById(id).orElseThrow(() -> new UserNotFoundException());
     }
 }
