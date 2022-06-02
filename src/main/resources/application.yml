@@ -7,6 +7,10 @@ spring:
     url: jdbc:mysql://localhost:3306/one
     username: root
     password: qwer1234
+  redis:
+    host: localhost
+    port: 49153
+    password: redispw
 
 mybatis:
 #  mapper-locations: classpath*:mapper/**/*.xml
