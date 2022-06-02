@@ -2,6 +2,7 @@ package com.one.global.sms.repository;
 
 import com.one.global.sms.model.SmsAuthentication;
 import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -26,20 +27,23 @@ class SmsAuthenticationRepositoryTest {
     }
 
     @Test
-    void 인증번호_저장() {
+    @DisplayName("인증번호 생성 후 저장")
+    void test() {
         Optional<SmsAuthentication> byId = smsAuthenticationRepository.findById(smsAuthentication.phoneNumber());
         assertThat(byId.get().phoneNumber()).isEqualTo(smsAuthentication.phoneNumber());
         assertThat(byId.get().authenticationNumber()).isEqualTo(smsAuthentication.authenticationNumber());
     }
 
     @Test
-    void 인증번호_만료() throws InterruptedException {
+    @DisplayName("인증번호 생성 후 3분 뒤 만료")
+    void test2() throws InterruptedException {
         Thread.sleep(1000 * 60 * 3); //인증번호 저장 후 3분 뒤
         assertThat(smsAuthenticationRepository.findById(smsAuthentication.phoneNumber())).isEmpty();
     }
 
     @Test
-    void 인증번호_덮어쓰기() {
+    @DisplayName("같은 휴대폰번호로 인증번호 생성 시 덮어쓰기")
+    void test3() {
         SmsAuthentication newSmsAuthentication = new SmsAuthentication("01012345678", "4321");
         smsAuthenticationRepository.save(newSmsAuthentication);
         Optional<SmsAuthentication> byId = smsAuthenticationRepository.findById(this.smsAuthentication.phoneNumber());
