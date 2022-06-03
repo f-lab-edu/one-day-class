@@ -3,22 +3,31 @@ package com.one.domain.sms.application;
 import com.one.domain.sms.exception.AlreadyAuthenticatedPhoneNumberException;
 import com.one.domain.sms.exception.AuthenticationNumberMismatchException;
 import com.one.domain.sms.exception.SmsAuthenticationNotFoundException;
+import com.one.domain.sms.exception.SmsSendFailedException;
 import com.one.domain.sms.repository.SmsAuthenticationRepository;
 import com.one.domain.sms.model.SmsAuthentication;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
+import net.nurigo.java_sdk.api.Message;
+import net.nurigo.java_sdk.exceptions.CoolsmsException;
+import org.json.simple.JSONObject;
+import org.springframework.core.env.Environment;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import javax.servlet.http.HttpSession;
+import java.util.HashMap;
 import java.util.Optional;
 import java.util.Random;
 
+@Slf4j
 @Service
 @RequiredArgsConstructor
 public class GeneralSmsAuthenticationService implements SmsAuthenticationService {
 
     private final SmsAuthenticationRepository smsAuthenticationRepository;
     private final HttpSession httpSession;
+    private final Environment environment;
 
     @Override
     public void authenticate(final String phoneNumber, final String authenticationNumber) {
@@ -41,10 +50,40 @@ public class GeneralSmsAuthenticationService implements SmsAuthenticationService
         }
         final String authenticationNumber = generateRandomNumber(4);
         smsAuthenticationRepository.save(new SmsAuthentication(phoneNumber, authenticationNumber));
-        final StringBuilder sb = new StringBuilder();
-        final String smsMessage = sb.append("인증번호[").append(authenticationNumber).append("]를 입력해주세요.").toString();
-        //TODO SMS 전송 로직 작성
+        send(phoneNumber, authenticationNumber);
         return authenticationNumber;
+    }
+
+    private void send(final String phoneNumber, final String authenticationNumber) {
+        log.info(environment.getProperty("sms.api-key"));
+        log.info(environment.getProperty("sms.api-secret"));
+        final Message message = new Message(environment.getProperty("sms.api-key"), environment.getProperty("sms.api-secret"));
+        final JSONObject result;
+        try {
+            result = message.send(generateSmsInfo(phoneNumber, generateSmsContent(authenticationNumber)));
+            log.debug(result.toString());
+//            if ("0".equals(result.get("success_count").toString())) {
+//                throw new SmsSendFailedException();
+//            }
+        } catch (CoolsmsException e) {
+            throw new SmsSendFailedException();
+        }
+    }
+
+    private String generateSmsContent(final String authenticationNumber) {
+        final StringBuilder sb = new StringBuilder();
+        final String content = sb.append("인증번호[").append(authenticationNumber).append("]를 입력해주세요.").toString();
+        return content;
+    }
+
+    private HashMap<String, String> generateSmsInfo(final String phoneNumber, final String content) {
+        final HashMap<String, String> smsInfo = new HashMap<>();
+        smsInfo.put("to", phoneNumber);
+        smsInfo.put("from", environment.getProperty("sms.from"));
+        smsInfo.put("type", "SMS");
+        smsInfo.put("text", content);
+        log.debug(smsInfo.toString());
+        return smsInfo;
     }
 
     @Override

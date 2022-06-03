@@ -3,6 +3,7 @@ package com.one.global.common.advice;
 import com.one.domain.sms.exception.AlreadyAuthenticatedPhoneNumberException;
 import com.one.domain.sms.exception.AuthenticationNumberMismatchException;
 import com.one.domain.sms.exception.SmsAuthenticationNotFoundException;
+import com.one.domain.sms.exception.SmsSendFailedException;
 import com.one.global.common.response.ErrorResponse;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.MethodArgumentNotValidException;
@@ -30,8 +31,12 @@ public class GlobalExceptionHandler {
     }
 
     @ExceptionHandler(SmsAuthenticationNotFoundException.class)
-    ResponseEntity<ErrorResponse> handleSmsAuthenticationNotFoundException(final AuthenticationNumberMismatchException e) {
+    ResponseEntity<ErrorResponse> handleSmsAuthenticationNotFoundException(final SmsAuthenticationNotFoundException e) {
         return ErrorResponse.of(E005);
     }
 
+    @ExceptionHandler(SmsSendFailedException.class)
+    ResponseEntity<ErrorResponse> handleSmsSendFailedException(final SmsSendFailedException e) {
+        return ErrorResponse.of(E006);
+    }
 }

@@ -1,9 +1,11 @@
-package com.one.global.sms.application;
+package com.one.domain.sms.application;
 
 import com.one.domain.sms.application.SmsAuthenticationService;
 import com.one.domain.sms.exception.AuthenticationNumberMismatchException;
 import com.one.domain.sms.model.SmsAuthentication;
 import com.one.domain.sms.repository.SmsAuthenticationRepository;
+import net.nurigo.java_sdk.api.Message;
+import net.nurigo.java_sdk.exceptions.CoolsmsException;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -11,6 +13,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 
 import javax.servlet.http.HttpSession;
+
+import java.util.HashMap;
+import java.util.Map;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.junit.jupiter.api.Assertions.assertThrows;
