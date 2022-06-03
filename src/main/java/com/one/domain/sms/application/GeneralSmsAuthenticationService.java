@@ -1,10 +1,10 @@
-package com.one.global.sms.application;
+package com.one.domain.sms.application;
 
-import com.one.global.sms.exception.AlreadyAuthenticatedPhoneNumberException;
-import com.one.global.sms.exception.AuthenticationNumberMismatchException;
-import com.one.global.sms.exception.SmsAuthenticationNotFoundException;
-import com.one.global.sms.model.SmsAuthentication;
-import com.one.global.sms.repository.SmsAuthenticationRepository;
+import com.one.domain.sms.exception.AlreadyAuthenticatedPhoneNumberException;
+import com.one.domain.sms.exception.AuthenticationNumberMismatchException;
+import com.one.domain.sms.exception.SmsAuthenticationNotFoundException;
+import com.one.domain.sms.repository.SmsAuthenticationRepository;
+import com.one.domain.sms.model.SmsAuthentication;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -23,7 +23,8 @@ public class GeneralSmsAuthenticationService implements SmsAuthenticationService
     @Override
     public void authenticate(final String phoneNumber, final String authenticationNumber) {
         final Optional<SmsAuthentication> smsAuthentication = smsAuthenticationRepository.findById(phoneNumber);
-        final String storedAuthenticationNumber = smsAuthentication.map(SmsAuthentication::authenticationNumber).orElseThrow(() -> new SmsAuthenticationNotFoundException());
+        final String storedAuthenticationNumber = smsAuthentication.map(SmsAuthentication::authenticationNumber)
+                .orElseThrow(() -> new SmsAuthenticationNotFoundException());
         if (authenticationNumber.equals(storedAuthenticationNumber)) {
             httpSession.setAttribute("authenticatedPhoneNumber", phoneNumber);
         } else {
@@ -33,7 +34,7 @@ public class GeneralSmsAuthenticationService implements SmsAuthenticationService
 
     @Transactional
     @Override
-    public void sendSms(final String phoneNumber) {
+    public String sendSms(final String phoneNumber) {
         //이미 인증된 번호면 예외 처리
         if (phoneNumber.equals(httpSession.getAttribute("authenticatedPhoneNumber"))) {
             throw new AlreadyAuthenticatedPhoneNumberException();
@@ -43,6 +44,7 @@ public class GeneralSmsAuthenticationService implements SmsAuthenticationService
         final StringBuilder sb = new StringBuilder();
         final String smsMessage = sb.append("인증번호[").append(authenticationNumber).append("]를 입력해주세요.").toString();
         //TODO SMS 전송 로직 작성
+        return authenticationNumber;
     }
 
     @Override

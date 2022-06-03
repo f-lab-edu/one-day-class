@@ -1,4 +1,4 @@
-package com.one.global.sms.model;
+package com.one.domain.sms.model;
 
 import org.springframework.data.annotation.Id;
 import org.springframework.data.redis.core.RedisHash;

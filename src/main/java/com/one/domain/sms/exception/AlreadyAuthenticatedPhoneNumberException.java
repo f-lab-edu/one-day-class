@@ -1,5 +1,4 @@
-package com.one.global.sms.exception;
+package com.one.domain.sms.exception;
 
 public class AlreadyAuthenticatedPhoneNumberException extends RuntimeException {
-
 }

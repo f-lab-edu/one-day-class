@@ -1,6 +1,7 @@
 package com.one.global.sms.repository;
 
-import com.one.global.sms.model.SmsAuthentication;
+import com.one.domain.sms.model.SmsAuthentication;
+import com.one.domain.sms.repository.SmsAuthenticationRepository;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
