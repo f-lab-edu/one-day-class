@@ -26,8 +26,8 @@ public class GeneralFileManagementService implements FileManagementService {
         final String storedFileName = makeStoredFileName(originalFilename);
         final String fullPath = getFullPath(storedFileName);
         multipartFile.transferTo(new File(fullPath));
-        final ImageFileSaveDto imageFileSaveDto = new ImageFileSaveDto(fullPath, storedFileName, imageFileType, LocalDateTime.now(), LocalDateTime.now());
-        return imageFileMapper.save(imageFileSaveDto);
+        final ImageFileSaveDto imageFileSaveDto = new ImageFileSaveDto(null, fullPath, storedFileName, imageFileType);
+        return imageFileMapper.saveImageFile(imageFileSaveDto);
     }
 
     private String getFullPath(final String storedFileName) {

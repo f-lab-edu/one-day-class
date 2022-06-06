@@ -1,8 +1,14 @@
 package com.one.domain.file.dto;
 
 import com.one.global.common.code.ImageFileType;
+import lombok.Getter;
+import lombok.RequiredArgsConstructor;
 
-import java.time.LocalDateTime;
-
-public record ImageFileSaveDto(String path, String name, ImageFileType contentType, LocalDateTime createTime, LocalDateTime updateTime) {
+@RequiredArgsConstructor
+@Getter
+public class ImageFileSaveDto {
+    private final Integer id;
+    private final String path;
+    private final String name;
+    private final ImageFileType contentType;
 }

@@ -7,8 +7,8 @@ public enum ImageFileType {
     D("클래스", "class")
     ;
 
-    private String detail;
-    private String path;
+    private final String detail;
+    private final String path;
 
     ImageFileType(String detail, String path) {
         this.detail = detail;
