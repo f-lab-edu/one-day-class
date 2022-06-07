@@ -7,4 +7,17 @@
           from user
          where id = #{id}
     </select>
+
+    <select id="selectUserByUserId" resultType="com.one.domain.user.model.User">
+        select *
+        from user
+        where user_id = #{userId}
+    </select>
+
+    <insert id="saveUser" parameterType="com.one.domain.user.dto.UserSaveRequestDto">
+        insert
+          into user
+               (image_file_id, user_id, password, name, phone_number, user_type, user_status, create_time, update_time)
+        values (#{imageFileId}, #{userId}, #{password}, #{name}, #{phoneNumber}, #{userType}, #{userStatus}, now(), now())
+    </insert>
 </mapper>
