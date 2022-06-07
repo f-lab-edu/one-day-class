@@ -55,6 +55,9 @@ public class GeneralSmsAuthenticationService implements SmsAuthenticationService
         final Message message = new Message(environment.getProperty("sms.api-key"), environment.getProperty("sms.api-secret"));
         final JSONObject result;
         try {
+            if ("local".equals(environment.getProperty("spring.config.activate.on-profile"))) {
+                return;
+            }
             result = message.send(generateSmsInfo(phoneNumber, generateSmsContent(authenticationNumber)));
             log.debug(result.toString());
         } catch (CoolsmsException e) {
