@@ -14,4 +14,9 @@ public interface UserMapper {
     Optional<User> selectUserByUserId(String userId);
 
     int saveUser(UserSaveRequestDto userSaveRequestDto);
+
+    void deleteAll();
+
+    void resetId();
+
 }
