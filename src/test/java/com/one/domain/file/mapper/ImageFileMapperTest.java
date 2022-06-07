@@ -2,7 +2,7 @@ package com.one.domain.file.mapper;
 
 import com.one.domain.file.dto.ImageFileSaveRequestDto;
 import com.one.domain.file.model.ImageFile;
-import com.one.global.common.code.ImageFileType;
+import com.one.domain.file.code.ImageFileType;
 import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;

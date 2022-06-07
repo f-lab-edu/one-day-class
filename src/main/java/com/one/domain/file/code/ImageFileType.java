@@ -1,4 +1,4 @@
-package com.one.global.common.code;
+package com.one.domain.file.code;
 
 public enum ImageFileType {
     A("심사", "user"),

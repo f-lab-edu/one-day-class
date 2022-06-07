@@ -1,6 +1,6 @@
 package com.one.domain.file.dto;
 
-import com.one.global.common.code.ImageFileType;
+import com.one.domain.file.code.ImageFileType;
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;
 

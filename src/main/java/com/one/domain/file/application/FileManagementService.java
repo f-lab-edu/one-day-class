@@ -1,6 +1,6 @@
 package com.one.domain.file.application;
 
-import com.one.global.common.code.ImageFileType;
+import com.one.domain.file.code.ImageFileType;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.io.IOException;

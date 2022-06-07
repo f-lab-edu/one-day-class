@@ -1,6 +1,6 @@
 package com.one.domain.file.model;
 
-import com.one.global.common.code.ImageFileType;
+import com.one.domain.file.code.ImageFileType;
 
 import java.time.LocalDateTime;
 

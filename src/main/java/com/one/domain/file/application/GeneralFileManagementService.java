@@ -3,14 +3,13 @@ package com.one.domain.file.application;
 import com.one.domain.file.dto.ImageFileSaveRequestDto;
 import com.one.domain.file.exception.ImageFileSaveFailedException;
 import com.one.domain.file.mapper.ImageFileMapper;
-import com.one.global.common.code.ImageFileType;
+import com.one.domain.file.code.ImageFileType;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.core.env.Environment;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
-import java.io.File;
 import java.io.IOException;
 import java.nio.file.Paths;
 import java.util.Optional;
