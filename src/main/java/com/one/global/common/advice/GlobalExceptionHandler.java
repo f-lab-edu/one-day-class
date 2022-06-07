@@ -1,9 +1,9 @@
 package com.one.global.common.advice;
 
-import com.one.domain.sms.exception.AlreadyAuthenticatedPhoneNumberException;
-import com.one.domain.sms.exception.AuthenticationNumberMismatchException;
-import com.one.domain.sms.exception.SmsAuthenticationNotFoundException;
-import com.one.domain.sms.exception.SmsSendFailedException;
+import com.one.domain.file.exception.ImageFileSaveFailedException;
+import com.one.domain.sms.exception.*;
+import com.one.domain.user.exception.DuplicateUserIdException;
+import com.one.domain.user.exception.UserNotFoundException;
 import com.one.global.common.response.ErrorResponse;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.MethodArgumentNotValidException;
@@ -18,6 +18,11 @@ public class GlobalExceptionHandler {
     @ExceptionHandler(MethodArgumentNotValidException.class)
     protected ResponseEntity<ErrorResponse> handleMethodArgumentNotValidException(final MethodArgumentNotValidException e) {
         return ErrorResponse.of(E001, e.getBindingResult());
+    }
+
+    @ExceptionHandler(UserNotFoundException.class)
+    ResponseEntity<ErrorResponse> handleUserNotFoundException(final UserNotFoundException e) {
+        return ErrorResponse.of(E002);
     }
 
     @ExceptionHandler(AlreadyAuthenticatedPhoneNumberException.class)
@@ -38,5 +43,20 @@ public class GlobalExceptionHandler {
     @ExceptionHandler(SmsSendFailedException.class)
     ResponseEntity<ErrorResponse> handleSmsSendFailedException(final SmsSendFailedException e) {
         return ErrorResponse.of(E006);
+    }
+
+    @ExceptionHandler(ImageFileSaveFailedException.class)
+    ResponseEntity<ErrorResponse> handleImageFileSaveFailedException(final ImageFileSaveFailedException e) {
+        return ErrorResponse.of(E007);
+    }
+
+    @ExceptionHandler(NotAuthenticatedPhoneNumberException.class)
+    ResponseEntity<ErrorResponse> handleNotAuthenticatedPhoneNumberException(final NotAuthenticatedPhoneNumberException e) {
+        return ErrorResponse.of(E009);
+    }
+
+    @ExceptionHandler(DuplicateUserIdException.class)
+    ResponseEntity<ErrorResponse> handleDuplicateUserIdException(final DuplicateUserIdException e) {
+        return ErrorResponse.of(E010);
     }
 }

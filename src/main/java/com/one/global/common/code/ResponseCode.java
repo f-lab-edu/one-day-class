@@ -10,6 +10,8 @@ public enum ResponseCode {
     S002(HttpStatus.OK, "휴대폰번호가 인증되었습니다."),
     S003(HttpStatus.CREATED, "파일이 정상적으로 업로드되었습니다."),
     S004(HttpStatus.OK, "파일이 정상적으로 다운로드되었습니다."),
+    S005(HttpStatus.CREATED, "게스트 회원가입이 완료되었습니다."),
+    S006(HttpStatus.ACCEPTED, "호스트 회원가입 신청이 완료되었습니다"),
 
     //EXCEPTION
     E001(HttpStatus.BAD_REQUEST, "유효값 검증에 실패했습니다."),
@@ -19,7 +21,9 @@ public enum ResponseCode {
     E005(HttpStatus.NOT_FOUND, "인증번호 발송 내역이 존재하지 않습니다."),
     E006(HttpStatus.CONFLICT, "인증번호 발송에 실패했습니다."),
     E007(HttpStatus.CONFLICT, "파일 업로드에 실패했습니다."),
-    E008(HttpStatus.CONFLICT, "파일 다운로드에 실패했습니다.")
+    E008(HttpStatus.CONFLICT, "파일 다운로드에 실패했습니다."),
+    E009(HttpStatus.FORBIDDEN, "휴대폰번호 인증이 필요합니다."), //403 FORBIDDEN: 클라이언트가 콘텐츠에 대한 접근 권한이 없을 때 발생한다. (401 UNAUTHORIZED와 다름)
+    E010(HttpStatus.CONFLICT, "중복된 아이디입니다.")
     ;
 
     private final HttpStatus httpStatus;
