@@ -5,5 +5,5 @@ public interface SmsAuthenticationService {
 
     String sendSms(String phoneNumber);
 
-    boolean isAuthenticated(String phoneNumber);
+    void checkAuthenticatedPhoneNumber(String phoneNumber);
 }

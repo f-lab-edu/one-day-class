@@ -1,9 +1,6 @@
 package com.one.domain.sms.application;
 
-import com.one.domain.sms.exception.AlreadyAuthenticatedPhoneNumberException;
-import com.one.domain.sms.exception.AuthenticationNumberMismatchException;
-import com.one.domain.sms.exception.SmsAuthenticationNotFoundException;
-import com.one.domain.sms.exception.SmsSendFailedException;
+import com.one.domain.sms.exception.*;
 import com.one.domain.sms.repository.SmsAuthenticationRepository;
 import com.one.domain.sms.model.SmsAuthentication;
 import lombok.RequiredArgsConstructor;
@@ -55,16 +52,11 @@ public class GeneralSmsAuthenticationService implements SmsAuthenticationService
     }
 
     private void send(final String phoneNumber, final String authenticationNumber) {
-        log.info(environment.getProperty("sms.api-key"));
-        log.info(environment.getProperty("sms.api-secret"));
         final Message message = new Message(environment.getProperty("sms.api-key"), environment.getProperty("sms.api-secret"));
         final JSONObject result;
         try {
             result = message.send(generateSmsInfo(phoneNumber, generateSmsContent(authenticationNumber)));
             log.debug(result.toString());
-//            if ("0".equals(result.get("success_count").toString())) {
-//                throw new SmsSendFailedException();
-//            }
         } catch (CoolsmsException e) {
             throw new SmsSendFailedException();
         }
@@ -87,12 +79,11 @@ public class GeneralSmsAuthenticationService implements SmsAuthenticationService
     }
 
     @Override
-    public boolean isAuthenticated(final String phoneNumber) {
-        //세션에서 인증된 휴대폰번호 확인 후 같으면 true, 다르면 false
-        if (phoneNumber.equals(httpSession.getAttribute("authenticatedPhoneNumber"))) {
-            return true;
+    public void checkAuthenticatedPhoneNumber(final String phoneNumber) {
+        //세션에서 인증된 휴대폰번호 확인 후 다르면 Exception
+        if (!phoneNumber.equals(httpSession.getAttribute("authenticatedPhoneNumber"))) {
+            throw new NotAuthenticatedPhoneNumberException();
         }
-        return false;
     }
 
     private String generateRandomNumber(final int digit) {
