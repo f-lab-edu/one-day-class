@@ -48,12 +48,10 @@ public class GeneralFileManagementService implements FileManagementService {
             if (i != 1) {
                 throw new RuntimeException();
             }
-            if (true) {
-                throw new RuntimeException();
-            }
             id = Optional.ofNullable(imageFileSaveRequestDto.getId());
             log.debug("id: {}", id);
         } catch (RuntimeException e) {
+            e.printStackTrace();
             throw new ImageFileSaveFailedException();
         }
         return id.orElseThrow(() -> new ImageFileSaveFailedException());
