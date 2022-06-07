@@ -23,7 +23,8 @@ public enum ResponseCode {
     E007(HttpStatus.CONFLICT, "파일 업로드에 실패했습니다."),
     E008(HttpStatus.CONFLICT, "파일 다운로드에 실패했습니다."),
     E009(HttpStatus.FORBIDDEN, "휴대폰번호 인증이 필요합니다."), //403 FORBIDDEN: 클라이언트가 콘텐츠에 대한 접근 권한이 없을 때 발생한다. (401 UNAUTHORIZED와 다름)
-    E010(HttpStatus.CONFLICT, "중복된 아이디입니다.")
+    E010(HttpStatus.CONFLICT, "중복된 아이디입니다."),
+    E011(HttpStatus.BAD_REQUEST, "패스워드와 검증 패스워드가 일치하지 않습니다.")
     ;
 
     private final HttpStatus httpStatus;

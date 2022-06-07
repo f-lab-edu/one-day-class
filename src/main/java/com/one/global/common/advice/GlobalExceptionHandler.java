@@ -3,6 +3,7 @@ package com.one.global.common.advice;
 import com.one.domain.file.exception.ImageFileSaveFailedException;
 import com.one.domain.sms.exception.*;
 import com.one.domain.user.exception.DuplicateUserIdException;
+import com.one.domain.user.exception.PasswordMismatchException;
 import com.one.domain.user.exception.UserNotFoundException;
 import com.one.global.common.response.ErrorResponse;
 import org.springframework.http.ResponseEntity;
@@ -58,5 +59,10 @@ public class GlobalExceptionHandler {
     @ExceptionHandler(DuplicateUserIdException.class)
     ResponseEntity<ErrorResponse> handleDuplicateUserIdException(final DuplicateUserIdException e) {
         return ErrorResponse.of(E010);
+    }
+
+    @ExceptionHandler(PasswordMismatchException.class)
+    ResponseEntity<ErrorResponse> handlePasswordMismatchException(final PasswordMismatchException e) {
+        return ErrorResponse.of(E011);
     }
 }

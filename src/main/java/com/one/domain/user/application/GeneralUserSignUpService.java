@@ -6,7 +6,8 @@ import com.one.domain.user.dto.GuestUserSignUpRequestDto;
 import com.one.domain.user.dto.HostUserSignUpRequestDto;
 import com.one.domain.user.dto.UserSaveRequestDto;
 import com.one.domain.user.exception.DuplicateUserIdException;
-import com.one.global.common.code.ImageFileType;
+import com.one.domain.user.exception.PasswordMismatchException;
+import com.one.domain.file.code.ImageFileType;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -26,6 +27,7 @@ public class GeneralUserSignUpService implements UserSignUpService {
     public void signUp(final GuestUserSignUpRequestDto guestUserSignUpRequestDto) {
         smsAuthenticationService.checkAuthenticatedPhoneNumber(guestUserSignUpRequestDto.phoneNumber());
         checkDuplicateUserId(guestUserSignUpRequestDto.userId());
+        checkPassword(guestUserSignUpRequestDto.password(), guestUserSignUpRequestDto.password2());
         userSaveService.save(UserSaveRequestDto.of(guestUserSignUpRequestDto));
     }
 
@@ -34,8 +36,15 @@ public class GeneralUserSignUpService implements UserSignUpService {
     public void signUp(final HostUserSignUpRequestDto hostUserSignUpRequestDto) throws IOException {
         smsAuthenticationService.checkAuthenticatedPhoneNumber(hostUserSignUpRequestDto.phoneNumber());
         checkDuplicateUserId(hostUserSignUpRequestDto.userId());
+        checkPassword(hostUserSignUpRequestDto.password(), hostUserSignUpRequestDto.password2());
         final int imageFileId = fileManagementService.upload(hostUserSignUpRequestDto.multipartFile(), ImageFileType.A);
         userSaveService.save(UserSaveRequestDto.of(hostUserSignUpRequestDto, imageFileId));
+    }
+
+    private void checkPassword(final String password, final String password2) {
+        if (!password.equals(password2)) {
+            throw new PasswordMismatchException();
+        }
     }
 
     private void checkDuplicateUserId(final String userId) {
