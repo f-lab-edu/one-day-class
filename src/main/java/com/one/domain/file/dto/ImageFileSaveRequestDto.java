@@ -6,7 +6,7 @@ import lombok.RequiredArgsConstructor;
 
 @RequiredArgsConstructor
 @Getter
-public class ImageFileSaveDto {
+public class ImageFileSaveRequestDto {
     private final Integer id;
     private final String path;
     private final String name;
