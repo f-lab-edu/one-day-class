@@ -2,10 +2,12 @@ package com.one.domain.sms.application;
 
 import com.one.domain.sms.application.SmsAuthenticationService;
 import com.one.domain.sms.exception.AuthenticationNumberMismatchException;
+import com.one.domain.sms.exception.NotAuthenticatedPhoneNumberException;
 import com.one.domain.sms.model.SmsAuthentication;
 import com.one.domain.sms.repository.SmsAuthenticationRepository;
 import net.nurigo.java_sdk.api.Message;
 import net.nurigo.java_sdk.exceptions.CoolsmsException;
+import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -51,15 +53,15 @@ class GeneralSmsAuthenticationServiceTest {
     }
 
     @Test
-    @DisplayName("인증 완료 여부 확인(인증 완료 시 true)")
+    @DisplayName("인증 완료 여부 확인(인증 완료 시 정상 리턴)")
     void test3() {
         smsAuthenticationService.authenticate("01012345678", "1234");
-        assertThat(smsAuthenticationService.isAuthenticated("01012345678")).isTrue();
+        smsAuthenticationService.checkAuthenticatedPhoneNumber("01012345678");
     }
 
     @Test
-    @DisplayName("인증 완료 여부 확인(인증 미완료 시 false)")
+    @DisplayName("인증 완료 여부 확인(인증 미완료 시 Exception)")
     void test4() {
-        assertThat(smsAuthenticationService.isAuthenticated("01012345678")).isFalse();
+        assertThrows(NotAuthenticatedPhoneNumberException.class, () -> smsAuthenticationService.checkAuthenticatedPhoneNumber("01012345678"));
     }
 }
