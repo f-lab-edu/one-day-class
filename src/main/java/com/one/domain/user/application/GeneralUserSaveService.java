@@ -14,6 +14,6 @@ public class GeneralUserSaveService implements UserSaveService {
     @Override
     public int save(UserSaveRequestDto userSaveRequestDto) {
         userMapper.saveUser(userSaveRequestDto);
-        return 0;
+        return userSaveRequestDto.getId();
     }
 }

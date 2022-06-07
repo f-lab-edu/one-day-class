@@ -1,5 +1,7 @@
 package com.one.domain.user.application;
 
+import com.one.domain.category.application.UserBigCategoryService;
+import com.one.domain.category.dto.UserBigCategorySaveRequestDto;
 import com.one.domain.file.application.FileManagementService;
 import com.one.domain.sms.application.SmsAuthenticationService;
 import com.one.domain.user.dto.GuestUserSignUpRequestDto;
@@ -22,6 +24,7 @@ public class GeneralUserSignUpService implements UserSignUpService {
     private final UserSaveService userSaveService;
     private final FileManagementService fileManagementService;
     private final SmsAuthenticationService smsAuthenticationService;
+    private final UserBigCategoryService userBigCategoryService;
 
     @Override
     public void signUp(final GuestUserSignUpRequestDto guestUserSignUpRequestDto) {
@@ -38,7 +41,8 @@ public class GeneralUserSignUpService implements UserSignUpService {
         checkDuplicateUserId(hostUserSignUpRequestDto.userId());
         checkPassword(hostUserSignUpRequestDto.password(), hostUserSignUpRequestDto.password2());
         final int imageFileId = fileManagementService.upload(hostUserSignUpRequestDto.multipartFile(), ImageFileType.A);
-        userSaveService.save(UserSaveRequestDto.of(hostUserSignUpRequestDto, imageFileId));
+        final int userId = userSaveService.save(UserSaveRequestDto.of(hostUserSignUpRequestDto, imageFileId));
+        userBigCategoryService.save(new UserBigCategorySaveRequestDto(userId, hostUserSignUpRequestDto.bigCategoryId()));
     }
 
     private void checkPassword(final String password, final String password2) {
