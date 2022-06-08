@@ -67,8 +67,7 @@ public class GeneralSmsAuthenticationService implements SmsAuthenticationService
 
     private String generateSmsContent(final String authenticationNumber) {
         final StringBuilder sb = new StringBuilder();
-        final String content = sb.append("인증번호[").append(authenticationNumber).append("]를 입력해주세요.").toString();
-        return content;
+        return sb.append("인증번호[").append(authenticationNumber).append("]를 입력해주세요.").toString();
     }
 
     private HashMap<String, String> generateSmsInfo(final String phoneNumber, final String content) {
