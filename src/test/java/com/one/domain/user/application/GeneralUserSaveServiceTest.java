@@ -34,9 +34,9 @@ class GeneralUserSaveServiceTest {
     @Test
     @DisplayName("유저 정보 저장에 성공한다.")
     public void test() {
-        int id = userSaveService.save(userSaveRequestDto);
+        final int id = userSaveService.save(userSaveRequestDto);
         assertThat(userSaveRequestDto.getId()).isEqualTo(id);
-        Optional<User> user = userMapper.selectUserById(id);
+        final Optional<User> user = userMapper.selectUserById(id);
         assertThat(user.get().id()).isEqualTo(id);
         assertThat(user.get().userId()).isEqualTo(userSaveRequestDto.getUserId());
         assertThat(user.get().imageFileId()).isEqualTo(userSaveRequestDto.getImageFileId());

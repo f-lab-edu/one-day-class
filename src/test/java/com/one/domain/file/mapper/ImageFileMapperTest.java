@@ -20,7 +20,7 @@ class ImageFileMapperTest {
     @Test
     @DisplayName("이미지 파일 정보를 DB에 저장하고 조회한다")
     public void test() {
-        ImageFileSaveRequestDto imageFileSaveRequestDto = new ImageFileSaveRequestDto(null, "testPath", "testName", ImageFileType.A);
+        final ImageFileSaveRequestDto imageFileSaveRequestDto = new ImageFileSaveRequestDto(null, "testPath", "testName", ImageFileType.A);
         imageFileMapper.saveImageFile(imageFileSaveRequestDto);
         Optional<ImageFile> imageFile = imageFileMapper.findImageFileById(imageFileSaveRequestDto.getId());
         Assertions.assertThat(imageFile.get().path()).isEqualTo(imageFileSaveRequestDto.getPath());

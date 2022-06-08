@@ -16,6 +16,7 @@ import org.springframework.boot.test.context.SpringBootTest;
 import java.util.Optional;
 
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 
 @SpringBootTest
 class GeneralUserFindServiceTest {
@@ -43,7 +44,7 @@ class GeneralUserFindServiceTest {
     @Test
     @DisplayName("유저 식별자로 조회에 성공한다.")
     void test() {
-        User userById = userFindService.findUserById(id);
+        final User userById = userFindService.findUserById(id);
         assertThat(userById.id()).isEqualTo(id);
         assertThat(userById.userId()).isEqualTo(userId);
         assertThat(userById.imageFileId()).isEqualTo(userSaveRequestDto.getImageFileId());
@@ -57,13 +58,13 @@ class GeneralUserFindServiceTest {
     @Test
     @DisplayName("유저 식별자로 조회된 값이 없을 시 예외가 발생한다.")
     void test2() {
-        org.junit.jupiter.api.Assertions.assertThrows(UserNotFoundException.class, () -> userFindService.findUserById(2));
+        assertThrows(UserNotFoundException.class, () -> userFindService.findUserById(2));
     }
 
     @Test
     @DisplayName("유저 아이디로 조회에 성공한다.")
     void test3() {
-        Optional<User> userByUserId = userFindService.findUserByUserId(userId);
+        final Optional<User> userByUserId = userFindService.findUserByUserId(userId);
         assertThat(userByUserId.get().id()).isEqualTo(id);
         assertThat(userByUserId.get().userId()).isEqualTo(userId);
         assertThat(userByUserId.get().imageFileId()).isEqualTo(userSaveRequestDto.getImageFileId());

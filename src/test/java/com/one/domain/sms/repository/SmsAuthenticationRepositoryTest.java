@@ -45,9 +45,9 @@ class SmsAuthenticationRepositoryTest {
     @Test
     @DisplayName("같은 휴대폰번호로 인증번호 생성 시 덮어쓰기")
     void test3() {
-        SmsAuthentication newSmsAuthentication = new SmsAuthentication("01012345678", "4321");
+        final SmsAuthentication newSmsAuthentication = new SmsAuthentication("01012345678", "4321");
         smsAuthenticationRepository.save(newSmsAuthentication);
-        Optional<SmsAuthentication> byId = smsAuthenticationRepository.findById(this.smsAuthentication.phoneNumber());
+        final Optional<SmsAuthentication> byId = smsAuthenticationRepository.findById(this.smsAuthentication.phoneNumber());
         assertThat(byId.get().phoneNumber()).isEqualTo(smsAuthentication.phoneNumber());
         assertThat(byId.get().authenticationNumber()).isEqualTo(newSmsAuthentication.authenticationNumber());
     }
