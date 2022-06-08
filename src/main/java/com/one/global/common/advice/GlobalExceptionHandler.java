@@ -13,8 +13,19 @@ import org.springframework.web.bind.annotation.RestControllerAdvice;
 
 import static com.one.global.common.code.ResponseCode.*;
 
+/**
+ * 스프링부트가 제공하는 ExceptionResolver의 우선순위는 다음과 같다.
+ * 1. ExceptionHandlerExceptionResolver -> @ExceptionHandler 처리
+ * 2. ResponseStatusExceptionResolver -> @ResponseStatus(value = "HttpStatus.BAD_REQUEST"), ResponseStatusException
+ * 3. DefaultHandlerExceptionResolver -> 스프링 내부 기본 예외 처리
+ */
 @RestControllerAdvice
 public class GlobalExceptionHandler {
+
+    @ExceptionHandler(Exception.class)
+    ResponseEntity<ErrorResponse> handleException(final Exception e) {
+        return ErrorResponse.of(e);
+    }
 
     @ExceptionHandler(MethodArgumentNotValidException.class)
     protected ResponseEntity<ErrorResponse> handleMethodArgumentNotValidException(final MethodArgumentNotValidException e) {
