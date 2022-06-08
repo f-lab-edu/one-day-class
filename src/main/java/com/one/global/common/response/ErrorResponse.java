@@ -10,12 +10,12 @@ import java.util.stream.Collectors;
 public record ErrorResponse(int status, String message, String detail, List<FieldError> errors) {
 
     public static ResponseEntity<ErrorResponse> of(final ResponseCode responseCode) {
-        ErrorResponse errorResponse = new ErrorResponse(responseCode.getHttpStatus().value(), responseCode.getHttpStatus().getReasonPhrase(), responseCode.getMessage(), new ArrayList<>());
+        final ErrorResponse errorResponse = new ErrorResponse(responseCode.getHttpStatus().value(), responseCode.getHttpStatus().getReasonPhrase(), responseCode.getMessage(), new ArrayList<>());
         return new ResponseEntity<>(errorResponse, responseCode.getHttpStatus());
     }
 
     public static ResponseEntity<ErrorResponse> of(final ResponseCode responseCode, final BindingResult bindingResult) {
-        ErrorResponse errorResponse = new ErrorResponse(responseCode.getHttpStatus().value(), responseCode.getHttpStatus().getReasonPhrase(), responseCode.getMessage(), FieldError.of(bindingResult));
+        final ErrorResponse errorResponse = new ErrorResponse(responseCode.getHttpStatus().value(), responseCode.getHttpStatus().getReasonPhrase(), responseCode.getMessage(), FieldError.of(bindingResult));
         return new ResponseEntity<>(errorResponse, responseCode.getHttpStatus());
     }
     record FieldError(String field, String value, String reason){
