@@ -31,11 +31,10 @@ public class GeneralSmsAuthenticationService implements SmsAuthenticationService
         final Optional<SmsAuthentication> smsAuthentication = smsAuthenticationRepository.findById(phoneNumber);
         final String storedAuthenticationNumber = smsAuthentication.map(SmsAuthentication::authenticationNumber)
                 .orElseThrow(() -> new SmsAuthenticationNotFoundException());
-        if (authenticationNumber.equals(storedAuthenticationNumber)) {
-            httpSession.setAttribute("authenticatedPhoneNumber", phoneNumber);
-        } else {
+        if (!authenticationNumber.equals(storedAuthenticationNumber)) {
             throw new AuthenticationNumberMismatchException();
         }
+        httpSession.setAttribute("authenticatedPhoneNumber", phoneNumber);
     }
 
     @Transactional
