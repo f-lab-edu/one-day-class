@@ -58,8 +58,7 @@ public class GeneralFileManagementService implements FileManagementService {
 
     private String getFullPath(final String storedFileName) {
         final StringBuilder sb = new StringBuilder();
-        String s = sb.append(environment.getProperty("file.dir")).append(storedFileName).toString();
-        return s;
+        return sb.append(environment.getProperty("file.dir")).append(storedFileName).toString();
     }
 
     /**
