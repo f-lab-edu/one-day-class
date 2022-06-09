@@ -9,7 +9,7 @@
     </select>
 
     <select id="selectUserByUserId" resultType="com.one.domain.user.model.User">
-        select *
+        select id, image_file_id, user_id, password, name, phone_number, user_type, user_status, create_time, update_time
         from user
         where user_id = #{userId}
     </select>
