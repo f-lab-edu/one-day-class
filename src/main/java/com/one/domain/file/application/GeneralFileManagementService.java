@@ -31,16 +31,11 @@ public class GeneralFileManagementService implements FileManagementService {
      */
     @Override
     public int upload(final MultipartFile multipartFile, final ImageFileType imageFileType) throws IOException {
-        log.debug("multipartFile: {}", multipartFile);
-        log.debug("imageFileType: {}", imageFileType);
         final Optional<Integer> id;
         try {
             final String originalFilename = multipartFile.getOriginalFilename();
             final String storedFileName = makeStoredFileName(originalFilename);
             final String fullPath = getFullPath(storedFileName);
-            log.info("originalFilename: {}", originalFilename);
-            log.info("storedFileName: {}", storedFileName);
-            log.info("fullPath: {}", fullPath);
             multipartFile.transferTo(Paths.get(fullPath).toAbsolutePath().toFile());
             final ImageFileSaveRequestDto imageFileSaveRequestDto = new ImageFileSaveRequestDto(null, fullPath, storedFileName, imageFileType);
             final int i = imageFileMapper.saveImageFile(imageFileSaveRequestDto);
@@ -48,7 +43,6 @@ public class GeneralFileManagementService implements FileManagementService {
                 throw new RuntimeException();
             }
             id = Optional.ofNullable(imageFileSaveRequestDto.getId());
-            log.debug("id: {}", id);
         } catch (RuntimeException e) {
             e.printStackTrace();
             throw new ImageFileSaveFailedException();
