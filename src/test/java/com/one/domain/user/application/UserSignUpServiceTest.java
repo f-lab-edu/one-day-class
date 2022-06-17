@@ -70,8 +70,8 @@ class UserSignUpServiceTest {
         assertThat(user.get().password()).isEqualTo(guestUserSignUpRequestDto.password());
         assertThat(user.get().name()).isEqualTo(guestUserSignUpRequestDto.name());
         assertThat(user.get().phoneNumber()).isEqualTo(guestUserSignUpRequestDto.phoneNumber());
-        assertThat(user.get().userType()).isEqualTo(UserType.G);
-        assertThat(user.get().userStatus()).isEqualTo(UserStatus.A);
+        assertThat(user.get().userType()).isEqualTo(UserType.GUEST.getValue());
+        assertThat(user.get().userStatus()).isEqualTo(UserStatus.SIGN_UP_SUCCESS.getValue());
     }
 
     @Test
@@ -85,7 +85,7 @@ class UserSignUpServiceTest {
     @Test
     @DisplayName("게스트 유저가 존재하는 아이디를 입력하여 예외가 발생한다.")
     public void test3() {
-        userMapper.saveUser(new UserSaveRequestDto(null, "test", null, "4567", "테스트", "01011111111", UserType.G, UserStatus.A));
+        userMapper.saveUser(new UserSaveRequestDto(null, "test", null, "4567", "테스트", "01011111111", UserType.GUEST.getValue(), UserStatus.SIGN_UP_SUCCESS.getValue()));
         final String phoneNumber = "01012345678";
         httpSession.setAttribute("authenticatedPhoneNumber", phoneNumber);
         final GuestUserSignUpRequestDto guestUserSignUpRequestDto = new GuestUserSignUpRequestDto("test", "1234", "1234", "홍길동", phoneNumber);
@@ -115,8 +115,8 @@ class UserSignUpServiceTest {
         assertThat(user.get().password()).isEqualTo(hostUserSignUpRequestDto.password());
         assertThat(user.get().name()).isEqualTo(hostUserSignUpRequestDto.name());
         assertThat(user.get().phoneNumber()).isEqualTo(hostUserSignUpRequestDto.phoneNumber());
-        assertThat(user.get().userType()).isEqualTo(UserType.H);
-        assertThat(user.get().userStatus()).isEqualTo(UserStatus.B);
+        assertThat(user.get().userType()).isEqualTo(UserType.HOST.getValue());
+        assertThat(user.get().userStatus()).isEqualTo(UserStatus.SIGN_UP_PROCEEDING.getValue());
         final Integer imageFileId = user.get().imageFileId();
         final Optional<ImageFile> imageFileById = imageFileMapper.findImageFileById(imageFileId);
         assertThat(new FileInputStream(imageFileById.get().path()).readAllBytes()).isEqualTo("Hello World".getBytes(StandardCharsets.UTF_8));

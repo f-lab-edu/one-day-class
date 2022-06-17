@@ -29,7 +29,7 @@ class UserSaveServiceTest {
 
     @BeforeEach
     public void setUp() {
-        userSaveRequestDto = new UserSaveRequestDto(null, "test2", 1, "1234", "호스트", "01099999999", UserType.H, UserStatus.B);
+        userSaveRequestDto = new UserSaveRequestDto(null, "test2", 1, "1234", "호스트", "01099999999", UserType.HOST.getValue(), UserStatus.SIGN_UP_PROCEEDING.getValue());
     }
 
     @Test

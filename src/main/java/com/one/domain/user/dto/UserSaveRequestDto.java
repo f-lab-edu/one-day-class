@@ -14,15 +14,15 @@ public final class UserSaveRequestDto {
     private final String password;
     private final String name;
     private final String phoneNumber;
-    private final UserType userType;
-    private final UserStatus userStatus;
+    private final int userType;
+    private final int userStatus;
 
     public static UserSaveRequestDto of(HostUserSignUpRequestDto hostUserSignUpRequestDto, int imageFileId) {
-        return new UserSaveRequestDto(null, hostUserSignUpRequestDto.userId(), imageFileId, hostUserSignUpRequestDto.password(), hostUserSignUpRequestDto.name(), hostUserSignUpRequestDto.phoneNumber(), UserType.H, UserStatus.B);
+        return new UserSaveRequestDto(null, hostUserSignUpRequestDto.userId(), imageFileId, hostUserSignUpRequestDto.password(), hostUserSignUpRequestDto.name(), hostUserSignUpRequestDto.phoneNumber(), UserType.HOST.getValue(), UserStatus.SIGN_UP_PROCEEDING.getValue());
     }
 
     public static UserSaveRequestDto of(GuestUserSignUpRequestDto guestUserSignUpRequestDto) {
-        return new UserSaveRequestDto(null, guestUserSignUpRequestDto.userId(), null, guestUserSignUpRequestDto.password(), guestUserSignUpRequestDto.name(), guestUserSignUpRequestDto.phoneNumber(), UserType.G, UserStatus.A);
+        return new UserSaveRequestDto(null, guestUserSignUpRequestDto.userId(), null, guestUserSignUpRequestDto.password(), guestUserSignUpRequestDto.name(), guestUserSignUpRequestDto.phoneNumber(), UserType.GUEST.getValue(), UserStatus.SIGN_UP_SUCCESS.getValue());
     }
 
 }

@@ -25,7 +25,7 @@ class UserMapperTest {
     public void setUp() {
         userMapper.deleteAll();
         userMapper.resetId();
-        userSaveRequestDto = new UserSaveRequestDto(null, "testId", 1, "1234", "테스트", "01000000000", UserType.H, UserStatus.B);
+        userSaveRequestDto = new UserSaveRequestDto(null, "testId", 1, "1234", "테스트", "01000000000", UserType.HOST.getValue(), UserStatus.SIGN_UP_PROCEEDING.getValue());
         userMapper.saveUser(userSaveRequestDto);
     }
 
