@@ -58,7 +58,7 @@ CREATE TABLE review
     `one_day_class_id`  INT            NOT NULL    COMMENT '클래스 테이블 식별자', 
     `image_file_id`     INT            NULL        COMMENT '이미지 파일 테이블 식별자', 
     `content`           VARCHAR(45)    NOT NULL    COMMENT '리뷰 내용', 
-    `review_type`       VARCHAR(1)     NOT NULL    COMMENT '''0'': 일반 후기, ''1'': 사진 후기', 
+    `review_type`       VARCHAR(1)     NOT NULL    COMMENT '''0'': 일반 후기, ''1'': 사진 후기',
     `rating`            DOUBLE         NOT NULL    COMMENT '리뷰 평점', 
     `create_time`       TIMESTAMP      NOT NULL    COMMENT '컬럼 최초 생성 시간', 
     `update_time`       TIMESTAMP      NOT NULL    COMMENT '컬럼 최종 수정 시간', 
@@ -102,9 +102,9 @@ ALTER TABLE nested_comment COMMENT '대댓글';
 CREATE TABLE image_file
 (
     `id`            INT            NOT NULL    AUTO_INCREMENT COMMENT '이미지 파일 테이블 식별자', 
-    `path`          VARCHAR(225)    NOT NULL    COMMENT '이미지 파일 경로',
+    `path`          VARCHAR(225)   NOT NULL    COMMENT '이미지 파일 경로',
     `name`          VARCHAR(45)    NOT NULL    COMMENT '이미지 파일명', 
-    `content_type`  VARCHAR(1)     NOT NULL    COMMENT '''0'': 심사, ''1'': 후기, ''2'': 카테고리, ''3'': 클래스', 
+    `content_type`  INT            NOT NULL    COMMENT '''0'': 심사, ''1'': 후기, ''2'': 카테고리, ''3'': 클래스',
     `create_time`   TIMESTAMP      NOT NULL    COMMENT '컬럼 최초 생성 시간', 
     `update_time`   TIMESTAMP      NOT NULL    COMMENT '컬럼 최종 수정 시간', 
      PRIMARY KEY (id)
