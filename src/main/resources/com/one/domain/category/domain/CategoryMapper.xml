@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.one.domain.category.domain.CategoryMapper">
+    <insert id="saveUserBigCategory" parameterType="com.one.domain.category.domain.UserBigCategory" >
+        insert
+          into user_big_category
+               (user_id, big_category_id, create_time, update_time)
+        values (#{userId}, #{bigCategoryId}, now(), now())
+    </insert>
+
+    <delete id="deleteAll">
+        delete from user_big_category
+    </delete>
+</mapper>
