@@ -32,6 +32,7 @@ public class FileManager {
             }
             id = Optional.ofNullable(imageFileSaveRequestDto.getId());
         } catch (RuntimeException re) {
+            log.error("이미지파일 저장 실패", re);
             throw new ImageFileSaveFailedException();
         }
         return id.orElseThrow(() -> new ImageFileSaveFailedException());
