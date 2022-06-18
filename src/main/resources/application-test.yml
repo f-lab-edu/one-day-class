@@ -1,0 +1,44 @@
+server:
+  port: 8080
+
+logging:
+  level:
+    com:
+      one: debug
+
+spring:
+  config:
+    activate:
+      on-profile: test
+  datasource:
+    driver-class-name: org.h2.Driver
+    url: jdbc:h2:mem:testdb;non_keywords=user;mode=mysql
+    username: sa
+    password:
+  sql:
+    init:
+      mode: always
+  h2:
+    console:
+      enabled: true
+  redis:
+    host: localhost
+    port: 49153
+    password: redispw
+  servlet:
+    multipart:
+      max-file-size: 1MB
+      enabled: true
+
+mybatis:
+#  mapper-locations: classpath*:mapper/**/*.xml
+  configuration:
+    map-underscore-to-camel-case: true
+
+sms:
+  api-key: NCSXDYZQTONF5TWN
+  api-secret: STIMLW3DKBOVRWPITUQQIAW7M6Y5W96L
+  from: "01071497833"
+
+file:
+  dir: /Users/bejim/file/

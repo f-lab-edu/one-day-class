@@ -21,11 +21,4 @@
         values (#{imageFileId}, #{userId}, #{password}, #{name}, #{phoneNumber}, #{userType}, #{userStatus}, now(), now())
     </insert>
 
-    <delete id="deleteAll">
-        delete from user;
-    </delete>
-
-    <select id="resetId">
-        alter table user auto_increment = 1;
-    </select>
 </mapper>

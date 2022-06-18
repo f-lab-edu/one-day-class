@@ -8,12 +8,14 @@ import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.Optional;
 
 import static org.assertj.core.api.Assertions.*;
 
 @SpringBootTest
+@Transactional
 class UserMapperTest {
 
     @Autowired
@@ -23,8 +25,6 @@ class UserMapperTest {
 
     @BeforeEach
     public void setUp() {
-        userMapper.deleteAll();
-        userMapper.resetId();
         userSaveRequestDto = new UserSaveRequestDto(null, "testId", 1, "1234", "테스트", "01000000000", UserType.HOST.getValue(), UserStatus.SIGN_UP_PROCEEDING.getValue());
         userMapper.saveUser(userSaveRequestDto);
     }

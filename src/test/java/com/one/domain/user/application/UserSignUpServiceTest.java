@@ -19,6 +19,8 @@ import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.mock.web.MockMultipartFile;
+import org.springframework.test.context.jdbc.Sql;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.multipart.MultipartFile;
 
 import javax.servlet.http.HttpSession;
@@ -32,6 +34,8 @@ import static org.assertj.core.api.Assertions.assertThat;
 import static org.junit.jupiter.api.Assertions.*;
 
 @SpringBootTest
+@Transactional
+@Sql("classpath:table-init.sql")
 class UserSignUpServiceTest {
 
     @Autowired
@@ -48,13 +52,6 @@ class UserSignUpServiceTest {
 
     @Autowired
     private HttpSession httpSession;
-
-    @BeforeEach
-    public void setUp() {
-        userMapper.deleteAll();
-        userMapper.resetId();
-        categoryMapper.deleteAll();
-    }
 
     @Test
     @DisplayName("게스트 유저가 회원가입에 성공한다.")

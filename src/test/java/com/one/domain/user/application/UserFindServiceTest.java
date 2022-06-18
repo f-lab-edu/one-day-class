@@ -12,6 +12,8 @@ import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.test.context.jdbc.Sql;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.Optional;
 
@@ -19,6 +21,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
 @SpringBootTest
+@Transactional
 class UserFindServiceTest {
 
     @Autowired
@@ -33,8 +36,6 @@ class UserFindServiceTest {
 
     @BeforeEach
     public void setUp() {
-        userMapper.deleteAll();
-        userMapper.resetId();
         userSaveRequestDto = new UserSaveRequestDto(null, "testId", 1, "1234", "테스트", "01000000000", UserType.HOST.getValue(), UserStatus.SIGN_UP_PROCEEDING.getValue());
         userMapper.saveUser(userSaveRequestDto);
         id = userSaveRequestDto.getId();
@@ -57,6 +58,7 @@ class UserFindServiceTest {
 
     @Test
     @DisplayName("유저 식별자로 조회된 값이 없을 시 예외가 발생한다.")
+    @Sql("classpath:table-init.sql")
     void test2() {
         assertThrows(UserNotFoundException.class, () -> userFindService.findUserById(2));
     }

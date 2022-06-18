@@ -9,7 +9,4 @@
         values (#{userId}, #{bigCategoryId}, now(), now())
     </insert>
 
-    <delete id="deleteAll">
-        delete from user_big_category
-    </delete>
 </mapper>
