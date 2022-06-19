@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.one.domain.user.domain.UserMapper">
+    <select id="selectUserById" resultType="com.one.domain.user.domain.User">
+        select *
+          from user
+         where id = #{id}
+    </select>
+
+    <select id="selectUserByUserId" resultType="com.one.domain.user.domain.User">
+        select id, image_file_id, user_id, password, name, phone_number, user_type, user_status, create_time, update_time
+        from user
+        where user_id = #{userId}
+    </select>
+
+    <insert id="saveUser" parameterType="com.one.domain.user.dto.UserSaveRequestDto" useGeneratedKeys="true" keyProperty="id">
+        insert
+          into user
+               (image_file_id, user_id, password, name, phone_number, user_type, user_status, create_time, update_time)
+        values (#{imageFileId}, #{userId}, #{password}, #{name}, #{phoneNumber}, #{userType}, #{userStatus}, now(), now())
+    </insert>
+
+</mapper>
