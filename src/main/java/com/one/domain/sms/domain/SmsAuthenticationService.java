@@ -1,5 +1,6 @@
 package com.one.domain.sms.domain;
 
+import com.one.domain.sms.dao.SmsAuthenticationRepository;
 import com.one.domain.sms.exception.AuthenticationNumberMismatchException;
 import com.one.domain.sms.exception.NotAuthenticatedPhoneNumberException;
 import com.one.domain.sms.exception.SmsAuthenticationNotFoundException;

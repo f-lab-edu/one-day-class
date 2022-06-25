@@ -1,6 +1,6 @@
 package com.one.domain.file.mapper;
 
-import com.one.domain.file.domain.ImageFileMapper;
+import com.one.domain.file.infrastructure.ImageFileMapper;
 import com.one.domain.file.dto.ImageFileSaveRequestDto;
 import com.one.domain.file.dto.ImageFileSaveRequestRecord;
 import com.one.domain.file.domain.ImageFile;

@@ -1,11 +1,11 @@
-package com.one.domain.user.application;
+package com.one.domain.user.service;
 
 import com.one.domain.category.application.UserBigCategorySaveService;
 import com.one.domain.category.domain.UserBigCategory;
 import com.one.domain.file.application.FileManagementService;
 import com.one.domain.sms.domain.SmsAuthenticationService;
-import com.one.domain.user.domain.UserFindService;
-import com.one.domain.user.domain.UserSaveService;
+import com.one.domain.user.domain.dao.UserFindDao;
+import com.one.domain.user.domain.dao.UserSaveDao;
 import com.one.domain.user.dto.GuestUserSignUpRequestDto;
 import com.one.domain.user.dto.HostUserSignUpRequestDto;
 import com.one.domain.user.dto.UserSaveRequestDto;
@@ -20,8 +20,8 @@ import org.springframework.transaction.annotation.Transactional;
 @Service
 public class UserSignUpService {
 
-    private final UserFindService userFindService;
-    private final UserSaveService userSaveService;
+    private final UserFindDao userFindDao;
+    private final UserSaveDao userSaveDao;
     private final FileManagementService fileManagementService;
     private final SmsAuthenticationService smsAuthenticationService;
     private final UserBigCategorySaveService userBigCategorySaveService;
@@ -30,7 +30,7 @@ public class UserSignUpService {
         smsAuthenticationService.checkAuthenticatedPhoneNumber(guestUserSignUpRequestDto.phoneNumber());
         checkDuplicateUserId(guestUserSignUpRequestDto.userId());
         checkPassword(guestUserSignUpRequestDto.password(), guestUserSignUpRequestDto.password2());
-        userSaveService.save(UserSaveRequestDto.of(guestUserSignUpRequestDto));
+        userSaveDao.save(UserSaveRequestDto.of(guestUserSignUpRequestDto));
     }
 
     @Transactional
@@ -39,7 +39,7 @@ public class UserSignUpService {
         checkDuplicateUserId(hostUserSignUpRequestDto.userId());
         checkPassword(hostUserSignUpRequestDto.password(), hostUserSignUpRequestDto.password2());
         final int imageFileId = fileManagementService.upload(hostUserSignUpRequestDto.multipartFile(), ImageFileType.USER);
-        final int userId = userSaveService.save(UserSaveRequestDto.of(hostUserSignUpRequestDto, imageFileId));
+        final int userId = userSaveDao.save(UserSaveRequestDto.of(hostUserSignUpRequestDto, imageFileId));
         userBigCategorySaveService.save(new UserBigCategory(userId, hostUserSignUpRequestDto.bigCategoryId()));
     }
 
@@ -50,7 +50,7 @@ public class UserSignUpService {
     }
 
     private void checkDuplicateUserId(final String userId) {
-        if (userFindService.findUserByUserId(userId).isPresent()) {
+        if (userFindDao.findUserByUserId(userId).isPresent()) {
             throw new DuplicateUserIdException();
         }
     }

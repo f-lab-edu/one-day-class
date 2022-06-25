@@ -1,12 +1,13 @@
-package com.one.domain.user.domain;
+package com.one.domain.user.domain.dao;
 
+import com.one.domain.user.infrastructure.UserMapper;
 import com.one.domain.user.dto.UserSaveRequestDto;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
 @Service
 @RequiredArgsConstructor
-public class UserSaveService {
+public class UserSaveDao {
 
     private final UserMapper userMapper;
 

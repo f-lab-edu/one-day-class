@@ -1,5 +1,6 @@
-package com.one.domain.sms.domain;
+package com.one.domain.sms.dao;
 
+import com.one.domain.sms.domain.SmsAuthentication;
 import org.springframework.data.repository.CrudRepository;
 
 public interface SmsAuthenticationRepository extends CrudRepository<SmsAuthentication, String> {

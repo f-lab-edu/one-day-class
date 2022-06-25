@@ -1,5 +1,6 @@
-package com.one.domain.user.domain;
+package com.one.domain.user.infrastructure;
 
+import com.one.domain.user.domain.User;
 import com.one.domain.user.dto.UserSaveRequestDto;
 import org.apache.ibatis.annotations.Mapper;
 
@@ -14,8 +15,5 @@ public interface UserMapper {
 
     int saveUser(UserSaveRequestDto userSaveRequestDto);
 
-    void deleteAll();
-
-    void resetId();
 
 }

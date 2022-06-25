@@ -1,5 +1,5 @@
-package com.one.global.common.response;
-import com.one.global.common.code.ResponseCode;
+package com.one.global.error;
+import com.one.global.common.ResponseCode;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.BindingResult;

@@ -1,10 +1,10 @@
-package com.one.domain.user.application;
+package com.one.domain.user.service;
 
 import com.one.domain.user.code.UserStatus;
 import com.one.domain.user.code.UserType;
-import com.one.domain.user.domain.UserSaveService;
+import com.one.domain.user.domain.dao.UserSaveDao;
 import com.one.domain.user.dto.UserSaveRequestDto;
-import com.one.domain.user.domain.UserMapper;
+import com.one.domain.user.infrastructure.UserMapper;
 import com.one.domain.user.domain.User;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
@@ -17,10 +17,10 @@ import java.util.Optional;
 import static org.assertj.core.api.Assertions.assertThat;
 
 @SpringBootTest
-class UserSaveServiceTest {
+class UserSaveDaoTest {
 
     @Autowired
-    private UserSaveService userSaveService;
+    private UserSaveDao userSaveDao;
 
     @Autowired
     private UserMapper userMapper;
@@ -35,7 +35,7 @@ class UserSaveServiceTest {
     @Test
     @DisplayName("유저 정보 저장에 성공한다.")
     public void test() {
-        final int id = userSaveService.save(userSaveRequestDto);
+        final int id = userSaveDao.save(userSaveRequestDto);
         assertThat(userSaveRequestDto.getId()).isEqualTo(id);
         final Optional<User> user = userMapper.selectUserById(id);
         assertThat(user.get().id()).isEqualTo(id);

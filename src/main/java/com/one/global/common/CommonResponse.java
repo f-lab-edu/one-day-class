@@ -1,6 +1,5 @@
-package com.one.global.common.response;
+package com.one.global.common;
 
-import com.one.global.common.code.ResponseCode;
 import org.springframework.http.ResponseEntity;
 
 import java.util.HashMap;

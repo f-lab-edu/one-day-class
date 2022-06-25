@@ -1,11 +1,11 @@
-package com.one.domain.user.application;
+package com.one.domain.user.service;
 
 import com.one.domain.user.code.UserStatus;
 import com.one.domain.user.code.UserType;
-import com.one.domain.user.domain.UserFindService;
+import com.one.domain.user.domain.dao.UserFindDao;
 import com.one.domain.user.dto.UserSaveRequestDto;
 import com.one.domain.user.exception.UserNotFoundException;
-import com.one.domain.user.domain.UserMapper;
+import com.one.domain.user.infrastructure.UserMapper;
 import com.one.domain.user.domain.User;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
@@ -22,10 +22,10 @@ import static org.junit.jupiter.api.Assertions.assertThrows;
 
 @SpringBootTest
 @Transactional
-class UserFindServiceTest {
+class UserFindDaoTest {
 
     @Autowired
-    private UserFindService userFindService;
+    private UserFindDao userFindDao;
 
     @Autowired
     private UserMapper userMapper;
@@ -45,7 +45,7 @@ class UserFindServiceTest {
     @Test
     @DisplayName("유저 식별자로 조회에 성공한다.")
     void test() {
-        final User userById = userFindService.findUserById(id);
+        final User userById = userFindDao.findUserById(id);
         assertThat(userById.id()).isEqualTo(id);
         assertThat(userById.userId()).isEqualTo(userId);
         assertThat(userById.imageFileId()).isEqualTo(userSaveRequestDto.getImageFileId());
@@ -60,13 +60,13 @@ class UserFindServiceTest {
     @DisplayName("유저 식별자로 조회된 값이 없을 시 예외가 발생한다.")
     @Sql("classpath:table-init.sql")
     void test2() {
-        assertThrows(UserNotFoundException.class, () -> userFindService.findUserById(2));
+        assertThrows(UserNotFoundException.class, () -> userFindDao.findUserById(2));
     }
 
     @Test
     @DisplayName("유저 아이디로 조회에 성공한다.")
     void test3() {
-        final Optional<User> userByUserId = userFindService.findUserByUserId(userId);
+        final Optional<User> userByUserId = userFindDao.findUserByUserId(userId);
         assertThat(userByUserId.get().id()).isEqualTo(id);
         assertThat(userByUserId.get().userId()).isEqualTo(userId);
         assertThat(userByUserId.get().imageFileId()).isEqualTo(userSaveRequestDto.getImageFileId());

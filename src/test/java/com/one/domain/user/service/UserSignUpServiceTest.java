@@ -1,7 +1,7 @@
-package com.one.domain.user.application;
+package com.one.domain.user.service;
 
-import com.one.domain.category.domain.CategoryMapper;
-import com.one.domain.file.domain.ImageFileMapper;
+import com.one.domain.category.infrastructure.CategoryMapper;
+import com.one.domain.file.infrastructure.ImageFileMapper;
 import com.one.domain.file.domain.ImageFile;
 import com.one.domain.sms.exception.NotAuthenticatedPhoneNumberException;
 import com.one.domain.user.code.UserStatus;
@@ -11,9 +11,8 @@ import com.one.domain.user.dto.HostUserSignUpRequestDto;
 import com.one.domain.user.dto.UserSaveRequestDto;
 import com.one.domain.user.exception.DuplicateUserIdException;
 import com.one.domain.user.exception.PasswordMismatchException;
-import com.one.domain.user.domain.UserMapper;
+import com.one.domain.user.infrastructure.UserMapper;
 import com.one.domain.user.domain.User;
-import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;

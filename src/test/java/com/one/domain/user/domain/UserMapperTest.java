@@ -3,6 +3,7 @@ package com.one.domain.user.domain;
 import com.one.domain.user.code.UserStatus;
 import com.one.domain.user.code.UserType;
 import com.one.domain.user.dto.UserSaveRequestDto;
+import com.one.domain.user.infrastructure.UserMapper;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;

@@ -1,8 +1,8 @@
-package com.one.domain.sms.presentation;
+package com.one.domain.sms.controller;
 
-import com.one.domain.sms.application.SmsService;
+import com.one.domain.sms.service.SmsService;
 import com.one.domain.sms.dto.AuthenticateRequestDto;
-import com.one.global.common.response.CommonResponse;
+import com.one.global.common.CommonResponse;
 import com.one.domain.sms.dto.SendSmsRequestDto;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
@@ -15,7 +15,7 @@ import javax.validation.Valid;
 import java.util.HashMap;
 import java.util.Map;
 
-import static com.one.global.common.code.ResponseCode.*;
+import static com.one.global.common.ResponseCode.*;
 
 @RestController
 @RequestMapping("/sms")

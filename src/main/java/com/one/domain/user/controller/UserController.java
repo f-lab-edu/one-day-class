@@ -1,12 +1,12 @@
-package com.one.domain.user.presentation;
+package com.one.domain.user.controller;
 
-import com.one.domain.user.domain.UserFindService;
-import com.one.domain.user.application.UserSignUpService;
+import com.one.domain.user.domain.dao.UserFindDao;
+import com.one.domain.user.service.UserSignUpService;
 import com.one.domain.user.dto.GuestUserSignUpRequestDto;
 import com.one.domain.user.dto.HostUserSignUpRequestDto;
 import com.one.domain.user.domain.User;
-import com.one.global.common.code.ResponseCode;
-import com.one.global.common.response.CommonResponse;
+import com.one.global.common.ResponseCode;
+import com.one.global.common.CommonResponse;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
@@ -20,11 +20,11 @@ import org.springframework.web.bind.annotation.*;
 public class UserController {
 
     private final UserSignUpService userSignUpService;
-    private final UserFindService userFindService;
+    private final UserFindDao userFindDao;
 
     @GetMapping("/{id}")
     public ResponseEntity<User> getUserById(@PathVariable final int id) {
-        final User user = userFindService.findUserById(id);
+        final User user = userFindDao.findUserById(id);
         return new ResponseEntity<>(user, HttpStatus.OK);
     }
 

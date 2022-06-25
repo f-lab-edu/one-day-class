@@ -1,10 +1,11 @@
 package com.one.domain.sms.application;
 
+import com.one.domain.sms.service.SmsService;
 import com.one.domain.sms.domain.SmsAuthenticationService;
 import com.one.domain.sms.exception.AuthenticationNumberMismatchException;
 import com.one.domain.sms.exception.NotAuthenticatedPhoneNumberException;
 import com.one.domain.sms.domain.SmsAuthentication;
-import com.one.domain.sms.domain.SmsAuthenticationRepository;
+import com.one.domain.sms.dao.SmsAuthenticationRepository;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;

@@ -1,9 +1,9 @@
-package com.one.domain.sms.application;
+package com.one.domain.sms.service;
 
+import com.one.domain.sms.dao.SmsAuthenticationRepository;
 import com.one.domain.sms.domain.SmsAuthenticationService;
-import com.one.domain.sms.exception.*;
-import com.one.domain.sms.domain.SmsAuthenticationRepository;
 import com.one.domain.sms.domain.SmsAuthentication;
+import com.one.domain.sms.exception.AlreadyAuthenticatedPhoneNumberException;
 import com.one.domain.sms.infrastructure.SmsSender;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;

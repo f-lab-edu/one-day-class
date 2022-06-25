@@ -1,17 +1,16 @@
-package com.one.global.common.advice;
+package com.one.global.error;
 
 import com.one.domain.file.exception.ImageFileSaveFailedException;
 import com.one.domain.sms.exception.*;
 import com.one.domain.user.exception.DuplicateUserIdException;
 import com.one.domain.user.exception.PasswordMismatchException;
 import com.one.domain.user.exception.UserNotFoundException;
-import com.one.global.common.response.ErrorResponse;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
 
-import static com.one.global.common.code.ResponseCode.*;
+import static com.one.global.common.ResponseCode.*;
 
 /**
  * 스프링부트가 제공하는 ExceptionResolver의 우선순위는 다음과 같다.

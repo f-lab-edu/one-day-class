@@ -2,9 +2,9 @@ package com.one.domain.file.domain;
 
 import com.one.domain.file.dto.ImageFileSaveRequestDto;
 import com.one.domain.file.exception.ImageFileSaveFailedException;
+import com.one.domain.file.infrastructure.ImageFileMapper;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.core.env.Environment;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
