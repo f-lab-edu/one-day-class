@@ -1,7 +1,7 @@
 package com.one.domain.user.service;
 
 import com.one.domain.category.domain.UserBigCategoryDao;
-import com.one.domain.category.domain.UserBigCategorySaveDto;
+import com.one.domain.category.dto.UserBigCategorySaveDto;
 import com.one.domain.file.domain.ImageFileManager;
 import com.one.domain.file.dto.ImageFileSaveDto;
 import com.one.domain.sms.domain.SmsAuthenticationManager;
@@ -40,7 +40,7 @@ public class UserSignUpService {
         smsAuthenticationManager.checkAuthenticatedPhoneNumber(hostUserSignUpDto.phoneNumber());
         final ImageFileSaveDto imageFileSaveDto = ImageFileSaveDto.of(environment.getProperty("file.dir"), hostUserSignUpDto.multipartFile(), ImageFileType.USER);
         final int imageFileId = imageFileManager.upload(imageFileSaveDto);
-        imageFileManager.save(hostUserSignUpDto.multipartFile(), imageFileSaveDto.getPath());
+        imageFileManager.save(hostUserSignUpDto.multipartFile(), imageFileSaveDto.path());
         final int userId = userDao.save(UserSaveDto.of(imageFileId, hostUserSignUpDto)).get().id();
         userBigCategoryDao.save(new UserBigCategorySaveDto(userId, hostUserSignUpDto.bigCategoryId()));
     }

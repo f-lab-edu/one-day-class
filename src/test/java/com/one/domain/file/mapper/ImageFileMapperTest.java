@@ -22,12 +22,12 @@ class ImageFileMapperTest {
     @Test
     @DisplayName("이미지 파일 정보를 DB에 저장하고 조회한다")
     public void test() {
-        final ImageFileSaveDto imageFileSaveDto = new ImageFileSaveDto(null, "testPath", "testName", ImageFileType.USER.getValue());
+        final ImageFileSaveDto imageFileSaveDto = new ImageFileSaveDto("testPath", "testName", ImageFileType.USER.getValue());
         imageFileMapper.saveImageFile(imageFileSaveDto);
-        Optional<ImageFile> imageFile = imageFileMapper.findImageFileById(imageFileSaveDto.getId());
-        Assertions.assertThat(imageFile.get().path()).isEqualTo(imageFileSaveDto.getPath());
-        Assertions.assertThat(imageFile.get().name()).isEqualTo(imageFileSaveDto.getName());
-        Assertions.assertThat(imageFile.get().contentType()).isEqualTo(imageFileSaveDto.getContentType());
+        Optional<ImageFile> imageFile = imageFileMapper.findByName(imageFileSaveDto.name());
+        Assertions.assertThat(imageFile.get().path()).isEqualTo(imageFileSaveDto.path());
+        Assertions.assertThat(imageFile.get().name()).isEqualTo(imageFileSaveDto.name());
+        Assertions.assertThat(imageFile.get().contentType()).isEqualTo(imageFileSaveDto.contentType());
     }
 
     @Test

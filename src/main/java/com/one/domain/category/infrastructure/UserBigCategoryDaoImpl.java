@@ -1,7 +1,7 @@
 package com.one.domain.category.infrastructure;
 
 import com.one.domain.category.domain.UserBigCategoryDao;
-import com.one.domain.category.domain.UserBigCategorySaveDto;
+import com.one.domain.category.dto.UserBigCategorySaveDto;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Repository;
 
