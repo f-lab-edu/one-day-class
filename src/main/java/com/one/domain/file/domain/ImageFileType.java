@@ -1,4 +1,4 @@
-package com.one.domain.file.code;
+package com.one.domain.file.domain;
 
 import lombok.Getter;
 

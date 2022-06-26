@@ -1,7 +1,7 @@
 package com.one.domain.sms.service;
 
-import com.one.domain.sms.dao.SmsAuthenticationRepository;
-import com.one.domain.sms.domain.SmsAuthenticationService;
+import com.one.domain.sms.infrastructure.SmsAuthenticationRepository;
+import com.one.domain.sms.domain.SmsAuthenticationManager;
 import com.one.domain.sms.domain.SmsAuthentication;
 import com.one.domain.sms.exception.AlreadyAuthenticatedPhoneNumberException;
 import com.one.domain.sms.infrastructure.SmsSender;
@@ -18,13 +18,13 @@ import java.util.Random;
 @RequiredArgsConstructor
 public class SmsService {
 
-    private final SmsAuthenticationService smsAuthenticationService;
+    private final SmsAuthenticationManager smsAuthenticationManager;
     private final SmsAuthenticationRepository smsAuthenticationRepository;
     private final SmsSender smsSender;
     private final HttpSession httpSession;
 
     public void authenticate(final String phoneNumber, final String authenticationNumber) {
-        smsAuthenticationService.authenticatePhoneNumber(authenticationNumber, phoneNumber);
+        smsAuthenticationManager.authenticatePhoneNumber(authenticationNumber, phoneNumber);
         httpSession.setAttribute("authenticatedPhoneNumber", phoneNumber);
     }
 

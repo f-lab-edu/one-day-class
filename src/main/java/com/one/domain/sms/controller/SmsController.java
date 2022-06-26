@@ -24,10 +24,12 @@ public class SmsController {
 
     private final SmsService smsService;
 
+    private final String AUTH_KEY = "authenticationNumber";
+
     @PostMapping("/send")
     public ResponseEntity<CommonResponse> sendSms(@RequestBody @Valid final SendSmsRequestDto sendSmsRequestDto) {
         final Map<String, Object> data = new HashMap<>();
-        data.put("authenticationNumber", smsService.sendSms(sendSmsRequestDto.phoneNumber()));
+        data.put(AUTH_KEY, smsService.sendSms(sendSmsRequestDto.phoneNumber()));
         return CommonResponse.of(S001, data);
     }
 

@@ -1,6 +1,6 @@
 package com.one.domain.sms.domain;
 
-import com.one.domain.sms.dao.SmsAuthenticationRepository;
+import com.one.domain.sms.infrastructure.SmsAuthenticationRepository;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;

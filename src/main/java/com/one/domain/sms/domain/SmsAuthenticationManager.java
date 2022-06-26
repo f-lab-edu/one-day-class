@@ -1,18 +1,18 @@
 package com.one.domain.sms.domain;
 
-import com.one.domain.sms.dao.SmsAuthenticationRepository;
+import com.one.domain.sms.infrastructure.SmsAuthenticationRepository;
 import com.one.domain.sms.exception.AuthenticationNumberMismatchException;
 import com.one.domain.sms.exception.NotAuthenticatedPhoneNumberException;
 import com.one.domain.sms.exception.SmsAuthenticationNotFoundException;
 import lombok.RequiredArgsConstructor;
-import org.springframework.stereotype.Service;
+import org.springframework.stereotype.Component;
 
 import javax.servlet.http.HttpSession;
 import java.util.Optional;
 
-@Service
+@Component
 @RequiredArgsConstructor
-public class SmsAuthenticationService {
+public class SmsAuthenticationManager {
 
     private final HttpSession httpSession;
 

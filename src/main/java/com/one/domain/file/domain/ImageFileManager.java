@@ -1,6 +1,6 @@
 package com.one.domain.file.domain;
 
-import com.one.domain.file.dto.ImageFileSaveRequestDto;
+import com.one.domain.file.dto.ImageFileSaveDto;
 import com.one.domain.file.exception.ImageFileSaveFailedException;
 import com.one.domain.file.infrastructure.ImageFileMapper;
 import lombok.RequiredArgsConstructor;
@@ -15,22 +15,23 @@ import java.util.Optional;
 @Slf4j
 @Service
 @RequiredArgsConstructor
-public class FileManager {
+public class ImageFileManager {
 
     private final ImageFileMapper imageFileMapper;
 
     /**
-     * @param imageFileSaveRequestDto
+     * @param imageFileSaveDto
      * @return 업로드된 이미지 파일 식별자
      */
-    public int upload(final ImageFileSaveRequestDto imageFileSaveRequestDto) {
+    public int upload(final ImageFileSaveDto imageFileSaveDto) {
         final Optional<Integer> id;
         try {
-            final int i = imageFileMapper.saveImageFile(imageFileSaveRequestDto);
+            final int i = imageFileMapper.saveImageFile(imageFileSaveDto);
             if (i != 1) {
                 throw new RuntimeException();
             }
-            id = Optional.ofNullable(imageFileSaveRequestDto.getId());
+            imageFileMapper.findByName(imageFileSaveDto.getName());
+            id = Optional.ofNullable(imageFileSaveDto.getId());
         } catch (RuntimeException re) {
             log.error("이미지파일 저장 실패", re);
             throw new ImageFileSaveFailedException();
@@ -48,5 +49,9 @@ public class FileManager {
         } catch (IOException e) {
             throw new ImageFileSaveFailedException();
         }
+    }
+
+    public ImageFile findByName(final String name) {
+        return imageFileMapper.findByName(name).get();
     }
 }

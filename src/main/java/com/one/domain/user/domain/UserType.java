@@ -1,4 +1,4 @@
-package com.one.domain.user.code;
+package com.one.domain.user.domain;
 
 import lombok.Getter;
 

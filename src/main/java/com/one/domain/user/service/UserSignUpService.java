@@ -1,56 +1,58 @@
 package com.one.domain.user.service;
 
-import com.one.domain.category.application.UserBigCategorySaveService;
-import com.one.domain.category.domain.UserBigCategory;
-import com.one.domain.file.application.FileManagementService;
-import com.one.domain.sms.domain.SmsAuthenticationService;
-import com.one.domain.user.domain.dao.UserFindDao;
-import com.one.domain.user.domain.dao.UserSaveDao;
-import com.one.domain.user.dto.GuestUserSignUpRequestDto;
-import com.one.domain.user.dto.HostUserSignUpRequestDto;
-import com.one.domain.user.dto.UserSaveRequestDto;
+import com.one.domain.category.domain.UserBigCategoryDao;
+import com.one.domain.category.domain.UserBigCategorySaveDto;
+import com.one.domain.file.domain.ImageFileManager;
+import com.one.domain.file.dto.ImageFileSaveDto;
+import com.one.domain.sms.domain.SmsAuthenticationManager;
+import com.one.domain.user.domain.UserDao;
+import com.one.domain.user.dto.UserSaveDto;
+import com.one.domain.user.dto.GuestUserSignUpDto;
+import com.one.domain.user.dto.HostUserSignUpDto;
 import com.one.domain.user.exception.DuplicateUserIdException;
 import com.one.domain.user.exception.PasswordMismatchException;
-import com.one.domain.file.code.ImageFileType;
+import com.one.domain.file.domain.ImageFileType;
 import lombok.RequiredArgsConstructor;
+import org.springframework.core.env.Environment;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-@RequiredArgsConstructor
 @Service
+@RequiredArgsConstructor
 public class UserSignUpService {
 
-    private final UserFindDao userFindDao;
-    private final UserSaveDao userSaveDao;
-    private final FileManagementService fileManagementService;
-    private final SmsAuthenticationService smsAuthenticationService;
-    private final UserBigCategorySaveService userBigCategorySaveService;
+    private final Environment environment;
+    private final UserDao userDao;
+    private final ImageFileManager imageFileManager;
+    private final SmsAuthenticationManager smsAuthenticationManager;
+    private final UserBigCategoryDao userBigCategoryDao;
 
-    public void signUp(final GuestUserSignUpRequestDto guestUserSignUpRequestDto) {
-        smsAuthenticationService.checkAuthenticatedPhoneNumber(guestUserSignUpRequestDto.phoneNumber());
-        checkDuplicateUserId(guestUserSignUpRequestDto.userId());
-        checkPassword(guestUserSignUpRequestDto.password(), guestUserSignUpRequestDto.password2());
-        userSaveDao.save(UserSaveRequestDto.of(guestUserSignUpRequestDto));
+    @Transactional
+    public void signUp(final GuestUserSignUpDto guestUserSignUpDto) {
+        smsAuthenticationManager.checkAuthenticatedPhoneNumber(guestUserSignUpDto.phoneNumber());
+        checkDuplicateUserId(guestUserSignUpDto.userId());
+        checkPassword(guestUserSignUpDto.password(), guestUserSignUpDto.password2());
+        userDao.save(UserSaveDto.from(guestUserSignUpDto));
     }
 
     @Transactional
-    public void signUp(final HostUserSignUpRequestDto hostUserSignUpRequestDto) {
-        smsAuthenticationService.checkAuthenticatedPhoneNumber(hostUserSignUpRequestDto.phoneNumber());
-        checkDuplicateUserId(hostUserSignUpRequestDto.userId());
-        checkPassword(hostUserSignUpRequestDto.password(), hostUserSignUpRequestDto.password2());
-        final int imageFileId = fileManagementService.upload(hostUserSignUpRequestDto.multipartFile(), ImageFileType.USER);
-        final int userId = userSaveDao.save(UserSaveRequestDto.of(hostUserSignUpRequestDto, imageFileId));
-        userBigCategorySaveService.save(new UserBigCategory(userId, hostUserSignUpRequestDto.bigCategoryId()));
+    public void signUp(final HostUserSignUpDto hostUserSignUpDto) {
+        smsAuthenticationManager.checkAuthenticatedPhoneNumber(hostUserSignUpDto.phoneNumber());
+        final ImageFileSaveDto imageFileSaveDto = ImageFileSaveDto.of(environment.getProperty("file.dir"), hostUserSignUpDto.multipartFile(), ImageFileType.USER);
+        final int imageFileId = imageFileManager.upload(imageFileSaveDto);
+        imageFileManager.save(hostUserSignUpDto.multipartFile(), imageFileSaveDto.getPath());
+        final int userId = userDao.save(UserSaveDto.of(imageFileId, hostUserSignUpDto)).get().id();
+        userBigCategoryDao.save(new UserBigCategorySaveDto(userId, hostUserSignUpDto.bigCategoryId()));
     }
 
-    private void checkPassword(final String password, final String password2) {
+    public void checkPassword(final String password, final String password2) {
         if (!password.equals(password2)) {
             throw new PasswordMismatchException();
         }
     }
 
-    private void checkDuplicateUserId(final String userId) {
-        if (userFindDao.findUserByUserId(userId).isPresent()) {
+    public void checkDuplicateUserId(final String userId) {
+        if (userDao.findByUserId(userId).isPresent()) {
             throw new DuplicateUserIdException();
         }
     }

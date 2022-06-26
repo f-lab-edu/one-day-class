@@ -1,6 +1,6 @@
 package com.one.domain.file.dto;
 
-import com.one.domain.file.code.ImageFileType;
+import com.one.domain.file.domain.ImageFileType;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;
@@ -11,17 +11,17 @@ import java.util.UUID;
 @RequiredArgsConstructor
 @Getter
 @Builder
-public class ImageFileSaveRequestDto {
+public class ImageFileSaveDto {
     private final Integer id;
     private final String path;
     private final String name;
     private final int contentType;
 
-    public static ImageFileSaveRequestDto of(final String fileDirectory, final MultipartFile multipartFile, final ImageFileType imageFileType) {
+    public static ImageFileSaveDto of(final String fileDirectory, final MultipartFile multipartFile, final ImageFileType imageFileType) {
         final String originalFilename = multipartFile.getOriginalFilename();
         final String storedFileName = makeStoredFileName(originalFilename);
         final String fullPath = getFullPath(fileDirectory, storedFileName);
-        return new ImageFileSaveRequestDto(null, fullPath, storedFileName, imageFileType.getValue());
+        return new ImageFileSaveDto(null, fullPath, storedFileName, imageFileType.getValue());
     }
 
     private static String getFullPath(final String fileDirectory, final String storedFileName) {
