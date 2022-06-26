@@ -1,4 +1,7 @@
 package com.one.domain.user.dto;
 
-public record SignInDto(String userId, String password) {
+import javax.validation.constraints.NotBlank;
+
+public record SignInDto(@NotBlank String userId,
+                        @NotBlank String password) {
 }

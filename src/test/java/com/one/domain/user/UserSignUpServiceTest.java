@@ -58,7 +58,7 @@ class UserSignUpServiceTest {
         final GuestUserSignUpDto guestUserSignUpDto = new GuestUserSignUpDto("test", "1234", "1234", "홍길동", phoneNumber);
         httpSession.setAttribute("authenticatedPhoneNumber", phoneNumber);
         userSignUpService.signUp(guestUserSignUpDto);
-        final Optional<User> user = userMapper.selectUserByUserId(guestUserSignUpDto.userId());
+        final Optional<User> user = userMapper.findByUserId(guestUserSignUpDto.userId());
         assertThat(user.get().id()).isEqualTo(1);
         assertThat(user.get().userId()).isEqualTo(guestUserSignUpDto.userId());
         assertThat(user.get().imageFileId()).isNull();
@@ -104,7 +104,7 @@ class UserSignUpServiceTest {
         final MultipartFile multipartFile = new MockMultipartFile("test", "test.txt", "text/plain", "Hello World".getBytes());
         final HostUserSignUpDto hostUserSignUpDto = new HostUserSignUpDto("test", "1234", "1234", "홍길동", phoneNumber, 1, multipartFile);
         userSignUpService.signUp(hostUserSignUpDto);
-        final Optional<User> user = userMapper.selectUserByUserId(hostUserSignUpDto.userId());
+        final Optional<User> user = userMapper.findByUserId(hostUserSignUpDto.userId());
         assertThat(user.get().id()).isEqualTo(1);
         assertThat(user.get().userId()).isEqualTo(hostUserSignUpDto.userId());
         assertThat(user.get().password()).isEqualTo(hostUserSignUpDto.password());

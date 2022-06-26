@@ -9,9 +9,9 @@ import java.util.Optional;
 @Mapper
 public interface UserMapper {
 
-    Optional<User> selectUserById(int id);
+    Optional<User> findById(int id);
 
-    Optional<User> selectUserByUserId(String userId);
+    Optional<User> findByUserId(String userId);
 
     int save(UserSaveDto userSaveDto);
 

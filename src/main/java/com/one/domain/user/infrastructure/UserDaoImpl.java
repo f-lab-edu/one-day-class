@@ -17,17 +17,17 @@ public class UserDaoImpl implements UserDao {
 
     @Override
     public User findById(final int id) {
-        return userMapper.selectUserById(id).orElseThrow(() -> new UserNotFoundException());
+        return userMapper.findById(id).orElseThrow(() -> new UserNotFoundException());
     }
 
     @Override
     public Optional<User> findByUserId(final String userId) {
-        return userMapper.selectUserByUserId(userId);
+        return userMapper.findByUserId(userId);
     }
 
     @Override
     public Optional<User> save(final UserSaveDto userSaveDto) {
         userMapper.save(userSaveDto);
-        return userMapper.selectUserByUserId(userSaveDto.userId());
+        return userMapper.findByUserId(userSaveDto.userId());
     }
 }

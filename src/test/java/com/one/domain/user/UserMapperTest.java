@@ -36,20 +36,20 @@ class UserMapperTest {
     @Test
     @DisplayName("유저 식별자로 조회에 성공한다.")
     void test() {
-        final Optional<User> user = userMapper.selectUserById(1);
+        final Optional<User> user = userMapper.findById(1);
         check(user.get());
     }
 
     @Test
     @DisplayName("유저 식별자로 조회된 값이 없을 시 예외가 발생한다.")
     void test2() {
-        assertThrows(UserNotFoundException.class, () -> userMapper.selectUserById(2));
+        assertThrows(UserNotFoundException.class, () -> userMapper.findById(2));
     }
 
     @Test
     @DisplayName("유저 아이디로 조회에 성공한다.")
     void test3() {
-        final Optional<User> user = userMapper.selectUserByUserId(userSaveDto.userId());
+        final Optional<User> user = userMapper.findByUserId(userSaveDto.userId());
         check(user.get());
     }
 
@@ -57,7 +57,7 @@ class UserMapperTest {
     @DisplayName("유저 정보 저장에 성공한다.")
     public void test4() {
         userMapper.save(userSaveDto);
-        final Optional<User> user = userMapper.selectUserByUserId(userSaveDto.userId());
+        final Optional<User> user = userMapper.findByUserId(userSaveDto.userId());
         check(user.get());
     }
 

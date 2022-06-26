@@ -1,0 +1,37 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="utf-8">
+</head>
+<body>
+
+<div class="container">
+
+    <div>
+        <h2>로그인</h2>
+    </div>
+
+    <form action="item.html" th:action th:object="${signInDto}" method="post">
+
+        <div>
+            <label for="loginId">로그인 ID</label>
+            <input type="text" id="loginId" th:field="*{userId}">
+        </div>
+        <div>
+            <label for="password">비밀번호</label>
+            <input type="password" id="password" th:field="*{password}">
+        </div>
+
+        <hr>
+
+        <div>
+            <div>
+                <button type="submit">로그인</button>
+            </div>
+        </div>
+
+    </form>
+
+</div>
+</body>
+</html>

@@ -1,12 +1,10 @@
 package com.one.domain.file.dto;
 
 import com.one.domain.file.domain.ImageFileType;
-import lombok.RequiredArgsConstructor;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.util.UUID;
 
-@RequiredArgsConstructor
 public record ImageFileSaveDto(String path, String name, int contentType) {
 
     public static ImageFileSaveDto of(final String fileDirectory, final MultipartFile multipartFile, final ImageFileType imageFileType) {

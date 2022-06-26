@@ -1,21 +1,18 @@
 package com.one.domain.user.service;
 
+import com.one.domain.user.domain.User;
 import com.one.domain.user.domain.UserDao;
+import com.one.domain.user.exception.UserNotFoundException;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
-
-import javax.servlet.http.HttpSession;
 
 @Service
 @RequiredArgsConstructor
 public class UserSignInService {
 
     private final UserDao userDao;
-    private final HttpSession httpSession;
 
-    public void signIn(final String userId, final String password) {
-        if (userDao.findByUserId(userId).get().password().equals(password)) {
-            httpSession.setAttribute("userId", userId);
-        }
+    public User signIn(final String userId, final String password) {
+        return userDao.findByUserId(userId).filter(u -> u.password().equals(password)).orElseThrow(() -> new UserNotFoundException());
     }
 }
