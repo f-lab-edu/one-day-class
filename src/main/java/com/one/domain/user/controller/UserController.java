@@ -13,6 +13,7 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletRequest;
@@ -28,6 +29,7 @@ public class UserController {
 
     private final UserSignUpService userSignUpService;
     private final UserSignInService userSignInService;
+    private final String USER_INFO = "USER_INFO";
 
     @ResponseBody
     @PostMapping("/signup/guest")
@@ -48,26 +50,31 @@ public class UserController {
     }
 
     @GetMapping("/signin")
-    public String signIn(@ModelAttribute SignInDto signInDto) {
+    public String signInForm(@ModelAttribute final SignInDto signInDto) {
         return "signInForm";
     }
 
-    @ResponseBody
     @PostMapping("/signin")
-    public ResponseEntity<Void> signIn(@ModelAttribute final SignInDto signInDto, HttpServletRequest request) {
+    public String signIn(@ModelAttribute final SignInDto signInDto, HttpServletRequest request) {
         final User user = userSignInService.signIn(signInDto.userId(), signInDto.password());
-        HttpSession session = request.getSession();
-        session.setAttribute("user", user);
-        return new ResponseEntity(HttpStatus.OK);
+        request.getSession().setAttribute(USER_INFO, user);
+        return "redirect:/users/" + user.id();
     }
 
-    @ResponseBody
+    @GetMapping("/{id}")
+    public String userInfo(@PathVariable int id, final Model model) {
+        final User user = userSignInService.findUserById(id);
+        model.addAttribute(user);
+        return "userInfo";
+    }
+
     @PostMapping("/signout")
-    public ResponseEntity<Void> signOut(HttpServletRequest request) {
+    public String signOut(HttpServletRequest request) {
         HttpSession session = request.getSession(false);
         if (session != null) {
+            session.removeAttribute(USER_INFO);
             session.invalidate();
         }
-        return new ResponseEntity(HttpStatus.OK);
+        return "redirect:/users/signin";
     }
 }

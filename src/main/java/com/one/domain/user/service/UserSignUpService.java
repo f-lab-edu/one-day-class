@@ -13,7 +13,7 @@ import com.one.domain.user.exception.DuplicateUserIdException;
 import com.one.domain.user.exception.PasswordMismatchException;
 import com.one.domain.file.domain.ImageFileType;
 import lombok.RequiredArgsConstructor;
-import org.springframework.core.env.Environment;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -21,11 +21,13 @@ import org.springframework.transaction.annotation.Transactional;
 @RequiredArgsConstructor
 public class UserSignUpService {
 
-    private final Environment environment;
     private final UserDao userDao;
     private final ImageFileManager imageFileManager;
     private final SmsAuthenticationManager smsAuthenticationManager;
     private final UserBigCategoryDao userBigCategoryDao;
+
+    @Value("${file.dir}")
+    private String fileDir;
 
     @Transactional
     public void signUp(final GuestUserSignUpDto guestUserSignUpDto) {
@@ -38,7 +40,7 @@ public class UserSignUpService {
     @Transactional
     public void signUp(final HostUserSignUpDto hostUserSignUpDto) {
         smsAuthenticationManager.checkAuthenticatedPhoneNumber(hostUserSignUpDto.phoneNumber());
-        final ImageFileSaveDto imageFileSaveDto = ImageFileSaveDto.of(environment.getProperty("file.dir"), hostUserSignUpDto.multipartFile(), ImageFileType.USER);
+        final ImageFileSaveDto imageFileSaveDto = ImageFileSaveDto.of(fileDir, hostUserSignUpDto.multipartFile(), ImageFileType.USER);
         final int imageFileId = imageFileManager.upload(imageFileSaveDto);
         imageFileManager.save(hostUserSignUpDto.multipartFile(), imageFileSaveDto.path());
         final int userId = userDao.save(UserSaveDto.of(imageFileId, hostUserSignUpDto)).get().id();

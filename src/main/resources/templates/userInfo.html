@@ -8,25 +8,29 @@
 <div class="container">
 
     <div>
-        <h2>로그인</h2>
+        <h2>사용자 정보</h2>
     </div>
 
-    <form th:action th:object="${signInDto}" method="post">
+    <form action="/users/signout" th:object="${user}" method="post">
 
         <div>
             <label for="loginId">로그인 ID</label>
             <input type="text" id="loginId" th:field="*{userId}">
         </div>
         <div>
-            <label for="password">비밀번호</label>
-            <input type="password" id="password" th:field="*{password}">
+            <label for="name">이름</label>
+            <input type="text" id="name" th:field="*{name}">
+        </div>
+        <div>
+            <label for="userType">유저 타입</label>
+            <input type="text" id="userType" th:field="*{userType}">
         </div>
 
         <hr>
 
         <div>
             <div>
-                <button type="submit">로그인</button>
+                <button type="submit">로그아웃</button>
             </div>
         </div>
 
