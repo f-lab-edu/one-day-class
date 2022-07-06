@@ -10,13 +10,8 @@ public record ImageFileSaveDto(String path, String name, int contentType) {
     public static ImageFileSaveDto of(final String fileDirectory, final MultipartFile multipartFile, final ImageFileType imageFileType) {
         final String originalFilename = multipartFile.getOriginalFilename();
         final String storedFileName = makeStoredFileName(originalFilename);
-        final String fullPath = getFullPath(fileDirectory, storedFileName);
+        final String fullPath = fileDirectory + storedFileName;
         return new ImageFileSaveDto(fullPath, storedFileName, imageFileType.getValue());
-    }
-
-    private static String getFullPath(final String fileDirectory, final String storedFileName) {
-        final StringBuilder sb = new StringBuilder();
-        return sb.append(fileDirectory).append(storedFileName).toString();
     }
 
     /**
