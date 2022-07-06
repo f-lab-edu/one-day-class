@@ -40,7 +40,7 @@ public class UserSignUpService {
     @Transactional
     public void signUp(final HostUserSignUpDto hostUserSignUpDto) {
         smsAuthenticationManager.checkAuthenticatedPhoneNumber(hostUserSignUpDto.phoneNumber());
-        final ImageFileSaveDto imageFileSaveDto = ImageFileSaveDto.of(fileDir, hostUserSignUpDto.multipartFile(), ImageFileType.USER);
+        final ImageFileSaveDto imageFileSaveDto = ImageFileSaveDto.of(fileDir, hostUserSignUpDto.multipartFile().getOriginalFilename(), ImageFileType.USER);
         final int imageFileId = imageFileManager.upload(imageFileSaveDto);
         imageFileManager.save(hostUserSignUpDto.multipartFile(), imageFileSaveDto.path());
         final int userId = userDao.save(UserSaveDto.of(imageFileId, hostUserSignUpDto)).get().id();
@@ -54,8 +54,6 @@ public class UserSignUpService {
     }
 
     public void checkDuplicateUserId(final String userId) {
-        if (userDao.findByUserId(userId).isPresent()) {
-            throw new DuplicateUserIdException();
-        }
+        userDao.findByUserId(userId).orElseThrow(DuplicateUserIdException::new);
     }
 }
