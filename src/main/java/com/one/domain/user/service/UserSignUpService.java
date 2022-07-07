@@ -27,7 +27,7 @@ public class UserSignUpService {
     private final UserBigCategoryDao userBigCategoryDao;
 
     @Value("${file.dir}")
-    private String fileDir;
+    private final String fileDir;
 
     @Transactional
     public void signUp(final GuestUserSignUpDto guestUserSignUpDto) {
