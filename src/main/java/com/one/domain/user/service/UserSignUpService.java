@@ -17,6 +17,8 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.Optional;
+
 @Service
 @RequiredArgsConstructor
 public class UserSignUpService {
@@ -39,18 +41,18 @@ public class UserSignUpService {
 
     @Transactional
     public void signUp(final HostUserSignUpDto hostUserSignUpDto) {
-        smsAuthenticationManager.checkAuthenticatedPhoneNumber(hostUserSignUpDto.phoneNumber());
-        final ImageFileSaveDto imageFileSaveDto = ImageFileSaveDto.of(fileDir, hostUserSignUpDto.multipartFile().getOriginalFilename(), ImageFileType.USER);
-        final int imageFileId = imageFileManager.upload(imageFileSaveDto);
-        imageFileManager.save(hostUserSignUpDto.multipartFile(), imageFileSaveDto.path());
-        final int userId = userDao.save(UserSaveDto.of(imageFileId, hostUserSignUpDto)).get().id();
-        userBigCategoryDao.save(new UserBigCategorySaveDto(userId, hostUserSignUpDto.bigCategoryId()));
+        Optional.ofNullable(hostUserSignUpDto).map(h -> {
+                    smsAuthenticationManager.checkAuthenticatedPhoneNumber(h.phoneNumber());
+                    return ImageFileSaveDto.of(fileDir, hostUserSignUpDto.multipartFile().getOriginalFilename(), ImageFileType.USER);
+                }).map(imageFileSaveDto -> {
+                    imageFileManager.save(hostUserSignUpDto.multipartFile(), imageFileSaveDto.path());
+                    return imageFileManager.upload(imageFileSaveDto);
+                }).map(imageFileId -> userDao.save(UserSaveDto.of(imageFileId, hostUserSignUpDto)).get().id())
+                .ifPresent(userId -> userBigCategoryDao.save(new UserBigCategorySaveDto(userId, hostUserSignUpDto.bigCategoryId())));
     }
 
     public void checkPassword(final String password, final String password2) {
-        if (!password.equals(password2)) {
-            throw new PasswordMismatchException();
-        }
+        Optional.ofNullable(password).filter(p -> p.equals(password2)).orElseThrow(PasswordMismatchException::new);
     }
 
     public void checkDuplicateUserId(final String userId) {
