@@ -1,0 +1,41 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="utf-8">
+</head>
+<body>
+
+<div class="container">
+
+    <div>
+        <h2>사용자 정보</h2>
+    </div>
+
+    <form action="/users/signout" th:object="${user}" method="post">
+
+        <div>
+            <label for="loginId">로그인 ID</label>
+            <input type="text" id="loginId" th:field="*{userId}">
+        </div>
+        <div>
+            <label for="name">이름</label>
+            <input type="text" id="name" th:field="*{name}">
+        </div>
+        <div>
+            <label for="userType">유저 타입</label>
+            <input type="text" id="userType" th:field="*{userType}">
+        </div>
+
+        <hr>
+
+        <div>
+            <div>
+                <button type="submit">로그아웃</button>
+            </div>
+        </div>
+
+    </form>
+
+</div>
+</body>
+</html>

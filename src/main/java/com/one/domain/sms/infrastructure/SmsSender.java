@@ -1,27 +1,37 @@
 package com.one.domain.sms.infrastructure;
 
 import com.one.domain.sms.exception.SmsSendFailedException;
-import lombok.RequiredArgsConstructor;
-import lombok.extern.slf4j.Slf4j;
 import net.nurigo.java_sdk.api.Message;
 import net.nurigo.java_sdk.exceptions.CoolsmsException;
-import org.json.simple.JSONObject;
-import org.springframework.core.env.Environment;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 
 import java.util.HashMap;
 
-@Slf4j
 @Service
-@RequiredArgsConstructor
 public class SmsSender {
 
-    private final Environment environment;
+    private final String apiKey;
+    private final String apiSecret;
+    private final String env;
+    private final String fromNumber;
+
+    public SmsSender(@Value("${sms.api-key}") final String apiKey,
+                     @Value("${sms.api-secret}") final String apiSecret,
+                     @Value("${spring.config.activate.on-profile}") final String env,
+                     @Value("${sms.from}") final String fromNumber) {
+        this.apiKey = apiKey;
+        this.apiSecret = apiSecret;
+        this.env = env;
+        this.fromNumber = fromNumber;
+    }
+
+    private final String TYPE = "SMS";
 
     public void send(final String phoneNumber, final String authenticationNumber) {
-        final Message message = new Message(environment.getProperty("sms.api-key"), environment.getProperty("sms.api-secret"));
+        final Message message = new Message(this.apiKey, this.apiSecret);
         try {
-            if ("local".equals(environment.getProperty("spring.config.activate.on-profile"))) {
+            if ("local".equals(env)) {
                 return;
             }
             message.send(generateSmsInfo(phoneNumber, generateSmsContent(authenticationNumber)));
@@ -38,8 +48,8 @@ public class SmsSender {
     public HashMap<String, String> generateSmsInfo(final String phoneNumber, final String content) {
         final HashMap<String, String> smsInfo = new HashMap<>();
         smsInfo.put("to", phoneNumber);
-        smsInfo.put("from", environment.getProperty("sms.from"));
-        smsInfo.put("type", "SMS");
+        smsInfo.put("from", this.fromNumber);
+        smsInfo.put("type", this.TYPE);
         smsInfo.put("text", content);
         return smsInfo;
     }

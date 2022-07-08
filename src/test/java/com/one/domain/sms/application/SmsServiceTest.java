@@ -1,10 +1,11 @@
 package com.one.domain.sms.application;
 
-import com.one.domain.sms.domain.SmsAuthenticationService;
+import com.one.domain.sms.service.SmsService;
+import com.one.domain.sms.domain.SmsAuthenticationManager;
 import com.one.domain.sms.exception.AuthenticationNumberMismatchException;
 import com.one.domain.sms.exception.NotAuthenticatedPhoneNumberException;
 import com.one.domain.sms.domain.SmsAuthentication;
-import com.one.domain.sms.domain.SmsAuthenticationRepository;
+import com.one.domain.sms.infrastructure.SmsAuthenticationRepository;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -23,7 +24,7 @@ class SmsServiceTest {
     private SmsService smsService;
 
     @Autowired
-    private SmsAuthenticationService smsAuthenticationService;
+    private SmsAuthenticationManager smsAuthenticationManager;
 
     @Autowired
     private SmsAuthenticationRepository smsAuthenticationRepository;
@@ -53,12 +54,12 @@ class SmsServiceTest {
     @DisplayName("인증 완료 여부 확인(인증 완료 시 정상 리턴)")
     void test3() {
         smsService.authenticate("01012345678", "1234");
-        smsAuthenticationService.checkAuthenticatedPhoneNumber("01012345678");
+        smsAuthenticationManager.checkAuthenticatedPhoneNumber("01012345678");
     }
 
     @Test
     @DisplayName("인증 완료 여부 확인(인증 미완료 시 Exception)")
     void test4() {
-        assertThrows(NotAuthenticatedPhoneNumberException.class, () -> smsAuthenticationService.checkAuthenticatedPhoneNumber("01012345678"));
+        assertThrows(NotAuthenticatedPhoneNumberException.class, () -> smsAuthenticationManager.checkAuthenticatedPhoneNumber("01012345678"));
     }
 }
