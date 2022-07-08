@@ -1,9 +1,6 @@
 package com.one.domain.file.domain;
 
-import lombok.Getter;
-
 //TODO enum 말고 상수로 선언한다면?
-@Getter
 public enum ImageFileType {
     USER(0, "심사", "user"),
     REVIEW(1, "후기", "review"),
@@ -19,5 +16,17 @@ public enum ImageFileType {
         this.value = value;
         this.detail = detail;
         this.path = path;
+    }
+
+    public int getValue() {
+        return this.value;
+    }
+
+    public String getDetail() {
+        return this.detail;
+    }
+
+    public String getPath() {
+        return this.path;
     }
 }

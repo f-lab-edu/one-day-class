@@ -24,12 +24,15 @@ dependencies {
 	implementation 'org.mybatis:mybatis:3.5.10'
 	implementation 'org.springframework.boot:spring-boot-starter-validation'
 	implementation 'org.springframework.boot:spring-boot-starter-data-redis'
-	implementation 'org.springframework.session:spring-session-data-redis'
+	/**
+	 * spring-session-data-redis 의존성을 추가해줄 필요가 없다.
+	 * spring-boot-starter-data-redis 의존성에 이미 호환되는 2.6.4 버전이 포함되는데
+	 * spring-session-data-redis 의존성을 추가하면 충돌 발생할 수 있다 2.6.3 버전이 추가되어 빈 초기화 과정에서 오류가 발생한다.
+	 */
+//	implementation 'org.springframework.session:spring-session-data-redis'
 	implementation 'org.springframework.boot:spring-boot-starter-thymeleaf'
 	implementation group: 'net.nurigo', name: 'javaSDK', version: '2.2'
-	compileOnly 'org.projectlombok:lombok'
 	runtimeOnly 'mysql:mysql-connector-java'
-	annotationProcessor 'org.projectlombok:lombok'
 	testImplementation 'org.springframework.boot:spring-boot-starter-test'
 	implementation 'com.h2database:h2:2.1.214'
 }

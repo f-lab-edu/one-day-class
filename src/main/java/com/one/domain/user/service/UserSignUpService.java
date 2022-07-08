@@ -12,7 +12,6 @@ import com.one.domain.user.dto.HostUserSignUpDto;
 import com.one.domain.user.exception.DuplicateUserIdException;
 import com.one.domain.user.exception.PasswordMismatchException;
 import com.one.domain.file.domain.ImageFileType;
-import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -20,16 +19,21 @@ import org.springframework.transaction.annotation.Transactional;
 import java.util.Optional;
 
 @Service
-@RequiredArgsConstructor
 public class UserSignUpService {
 
     private final UserDao userDao;
     private final ImageFileManager imageFileManager;
     private final SmsAuthenticationManager smsAuthenticationManager;
     private final UserBigCategoryDao userBigCategoryDao;
-
-    @Value("${file.dir}")
     private final String fileDir;
+
+    public UserSignUpService(final UserDao userDao, final ImageFileManager imageFileManager, final SmsAuthenticationManager smsAuthenticationManager, final UserBigCategoryDao userBigCategoryDao, @Value("${file.dir}") final String fileDir) {
+        this.userDao = userDao;
+        this.imageFileManager = imageFileManager;
+        this.smsAuthenticationManager = smsAuthenticationManager;
+        this.userBigCategoryDao = userBigCategoryDao;
+        this.fileDir = fileDir;
+    }
 
     @Transactional
     public void signUp(final GuestUserSignUpDto guestUserSignUpDto) {

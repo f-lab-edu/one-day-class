@@ -4,18 +4,22 @@ import com.one.domain.sms.infrastructure.SmsAuthenticationRepository;
 import com.one.domain.sms.exception.AuthenticationNumberMismatchException;
 import com.one.domain.sms.exception.NotAuthenticatedPhoneNumberException;
 import com.one.domain.sms.exception.SmsAuthenticationNotFoundException;
-import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
 
 import javax.servlet.http.HttpSession;
 import java.util.Optional;
 
 @Component
-@RequiredArgsConstructor
 public class SmsAuthenticationManager {
 
     private final HttpSession httpSession;
     private final SmsAuthenticationRepository smsAuthenticationRepository;
+
+    public SmsAuthenticationManager(HttpSession httpSession, SmsAuthenticationRepository smsAuthenticationRepository) {
+        this.httpSession = httpSession;
+        this.smsAuthenticationRepository = smsAuthenticationRepository;
+    }
+
     private final String AUTHENTICATED_PHONE_NUMBER = "authenticatedPhoneNumber";
 
     public void authenticatePhoneNumber(String authenticationNumber, String phoneNumber) {

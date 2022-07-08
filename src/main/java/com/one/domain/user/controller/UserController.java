@@ -8,9 +8,6 @@ import com.one.domain.user.dto.GuestUserSignUpDto;
 import com.one.domain.user.dto.HostUserSignUpDto;
 import com.one.global.common.ResponseCode;
 import com.one.global.common.CommonResponse;
-import lombok.RequiredArgsConstructor;
-import lombok.extern.slf4j.Slf4j;
-import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -18,17 +15,20 @@ import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
-import javax.validation.Valid;
 
-@Slf4j
 @Controller
 @RequestMapping("/users")
 //@RestController: @ResponseBody(View 없이 객체를 반환하고자 할 때 사용)와 @Controller의 합성
-@RequiredArgsConstructor
 public class UserController {
 
     private final UserSignUpService userSignUpService;
     private final UserSignInService userSignInService;
+
+    public UserController(UserSignUpService userSignUpService, UserSignInService userSignInService) {
+        this.userSignUpService = userSignUpService;
+        this.userSignInService = userSignInService;
+    }
+
     private final String USER_INFO = "USER_INFO";
 
     @ResponseBody
@@ -55,7 +55,7 @@ public class UserController {
     }
 
     @PostMapping("/signin")
-    public String signIn(@ModelAttribute final SignInDto signInDto, HttpServletRequest request) {
+    public String signIn(@ModelAttribute final SignInDto signInDto, final HttpServletRequest request) {
         final User user = userSignInService.signIn(signInDto.userId(), signInDto.password());
         request.getSession().setAttribute(USER_INFO, user);
         return "redirect:/users/" + user.id();
@@ -69,7 +69,7 @@ public class UserController {
     }
 
     @PostMapping("/signout")
-    public String signOut(HttpServletRequest request) {
+    public String signOut(final HttpServletRequest request) {
         HttpSession session = request.getSession(false);
         if (session != null) {
             session.removeAttribute(USER_INFO);

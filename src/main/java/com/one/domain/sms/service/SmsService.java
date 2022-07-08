@@ -5,23 +5,26 @@ import com.one.domain.sms.domain.SmsAuthenticationManager;
 import com.one.domain.sms.domain.SmsAuthentication;
 import com.one.domain.sms.exception.AlreadyAuthenticatedPhoneNumberException;
 import com.one.domain.sms.infrastructure.SmsSender;
-import lombok.RequiredArgsConstructor;
-import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import javax.servlet.http.HttpSession;
 import java.util.Random;
 
-@Slf4j
 @Service
-@RequiredArgsConstructor
 public class SmsService {
 
     private final SmsAuthenticationManager smsAuthenticationManager;
     private final SmsAuthenticationRepository smsAuthenticationRepository;
     private final SmsSender smsSender;
     private final HttpSession httpSession;
+
+    public SmsService(final SmsAuthenticationManager smsAuthenticationManager, final SmsAuthenticationRepository smsAuthenticationRepository, final SmsSender smsSender, final HttpSession httpSession) {
+        this.smsAuthenticationManager = smsAuthenticationManager;
+        this.smsAuthenticationRepository = smsAuthenticationRepository;
+        this.smsSender = smsSender;
+        this.httpSession = httpSession;
+    }
 
     public void authenticate(final String phoneNumber, final String authenticationNumber) {
         smsAuthenticationManager.authenticatePhoneNumber(authenticationNumber, phoneNumber);

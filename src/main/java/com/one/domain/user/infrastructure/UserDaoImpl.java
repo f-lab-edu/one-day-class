@@ -4,16 +4,18 @@ import com.one.domain.user.domain.User;
 import com.one.domain.user.dto.UserSaveDto;
 import com.one.domain.user.domain.UserDao;
 import com.one.domain.user.exception.UserNotFoundException;
-import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Repository;
 
 import java.util.Optional;
 
 @Repository
-@RequiredArgsConstructor
 public class UserDaoImpl implements UserDao {
 
     private final UserMapper userMapper;
+
+    public UserDaoImpl(UserMapper userMapper) {
+        this.userMapper = userMapper;
+    }
 
     @Override
     public User findById(final int id) {

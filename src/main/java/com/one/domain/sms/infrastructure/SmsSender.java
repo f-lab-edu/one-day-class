@@ -1,32 +1,30 @@
 package com.one.domain.sms.infrastructure;
 
 import com.one.domain.sms.exception.SmsSendFailedException;
-import lombok.RequiredArgsConstructor;
-import lombok.extern.slf4j.Slf4j;
 import net.nurigo.java_sdk.api.Message;
 import net.nurigo.java_sdk.exceptions.CoolsmsException;
 import org.springframework.beans.factory.annotation.Value;
-import org.springframework.core.env.Environment;
 import org.springframework.stereotype.Service;
 
 import java.util.HashMap;
 
-@Slf4j
 @Service
-@RequiredArgsConstructor
 public class SmsSender {
 
-    @Value("${sms.api-key}")
     private final String apiKey;
-
-    @Value("${sms.api-secret}")
     private final String apiSecret;
-
-    @Value("${spring.config.activate.on-profile}")
     private final String env;
-
-    @Value("${sms.from}")
     private final String fromNumber;
+
+    public SmsSender(@Value("${sms.api-key}") final String apiKey,
+                     @Value("${sms.api-secret}") final String apiSecret,
+                     @Value("${spring.config.activate.on-profile}") final String env,
+                     @Value("${sms.from}") final String fromNumber) {
+        this.apiKey = apiKey;
+        this.apiSecret = apiSecret;
+        this.env = env;
+        this.fromNumber = fromNumber;
+    }
 
     private final String TYPE = "SMS";
 

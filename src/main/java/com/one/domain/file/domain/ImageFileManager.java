@@ -3,22 +3,21 @@ package com.one.domain.file.domain;
 import com.one.domain.file.dto.ImageFileSaveDto;
 import com.one.domain.file.exception.ImageFileSaveFailedException;
 import com.one.domain.file.infrastructure.ImageFileMapper;
-import lombok.RequiredArgsConstructor;
-import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Component;
-import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.io.IOException;
 import java.nio.file.Paths;
 import java.util.Optional;
 
-@Slf4j
 @Component
-@RequiredArgsConstructor
 public class ImageFileManager {
 
     private final ImageFileMapper imageFileMapper;
+
+    public ImageFileManager(ImageFileMapper imageFileMapper) {
+        this.imageFileMapper = imageFileMapper;
+    }
 
     /**
      * @param imageFileSaveDto
@@ -34,7 +33,6 @@ public class ImageFileManager {
             Optional<ImageFile> imageFile = imageFileMapper.findByName(imageFileSaveDto.name());
             id = imageFile.get().id();
         } catch (RuntimeException re) {
-            log.error("이미지파일 저장 실패", re);
             throw new ImageFileSaveFailedException();
         }
         return id;

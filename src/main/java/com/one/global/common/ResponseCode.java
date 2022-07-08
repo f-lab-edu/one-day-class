@@ -1,9 +1,7 @@
 package com.one.global.common;
 
-import lombok.Getter;
 import org.springframework.http.HttpStatus;
 
-@Getter
 public enum ResponseCode {
     //SUCCESS
     S001(HttpStatus.CREATED, "인증번호 전송을 완료했습니다."),
@@ -30,8 +28,16 @@ public enum ResponseCode {
     private final HttpStatus httpStatus;
     private final String message;
 
-    ResponseCode(HttpStatus httpStatus, String message) {
+    ResponseCode(final HttpStatus httpStatus, final String message) {
         this.httpStatus = httpStatus;
         this.message = message;
+    }
+
+    public HttpStatus getHttpStatus() {
+        return this.httpStatus;
+    }
+
+    public String getMessage() {
+        return this.message;
     }
 }

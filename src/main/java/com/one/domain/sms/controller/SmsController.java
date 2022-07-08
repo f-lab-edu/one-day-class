@@ -4,7 +4,6 @@ import com.one.domain.sms.service.SmsService;
 import com.one.domain.sms.dto.AuthenticateRequestDto;
 import com.one.global.common.CommonResponse;
 import com.one.domain.sms.dto.SendSmsRequestDto;
-import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -19,10 +18,13 @@ import static com.one.global.common.ResponseCode.*;
 
 @RestController
 @RequestMapping("/sms")
-@RequiredArgsConstructor
 public class SmsController {
 
     private final SmsService smsService;
+
+    public SmsController(SmsService smsService) {
+        this.smsService = smsService;
+    }
 
     private final String AUTH_KEY = "authenticationNumber";
 
